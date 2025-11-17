@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjyfv3cmla0cb"]
+
+[ext_resource type="Material" uid="uid://sphx71p86yxq" path="res://effects/mats/ice.tres" id="1_i5mq6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v6qha"]
+lifetime_randomness = 0.02
+emission_shape = 1
+emission_sphere_radius = 1.0
+inherit_velocity_ratio = 0.4
+direction = Vector3(0, 1, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 0.01
+initial_velocity_max = 0.5
+orbit_velocity_min = -1.291
+orbit_velocity_max = 0.7090001
+radial_velocity_min = -0.10002235
+radial_velocity_max = 0.09997764
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -1.0000023
+radial_accel_max = 0.99999774
+scale_min = 0.19999999
+scale_max = 1.5
+hue_variation_min = -2.2351742e-08
+hue_variation_max = -2.2351742e-08
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xbhpg"]
+material = ExtResource("1_i5mq6")
+size = Vector2(1, 1.5)
+orientation = 2
+
+[node name="Ice" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+visibility_range_fade_mode = 1
+amount = 16
+amount_ratio = 0.8052
+draw_order = 3
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_v6qha")
+draw_pass_1 = SubResource("PlaneMesh_xbhpg")

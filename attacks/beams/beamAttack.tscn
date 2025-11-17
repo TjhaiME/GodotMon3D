@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://j6fsewaefmm1"]
+
+[ext_resource type="Script" uid="uid://i0d7r8uiw4y5" path="res://attacks/effects/beam_effect_parent.gd" id="1_d3apr"]
+[ext_resource type="Script" uid="uid://boap25qxi4hhx" path="res://attacks/base/hitbox_attack_beam.gd" id="2_xjwua"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d3apr"]
+resource_local_to_scene = true
+
+[node name="beamEffectParent" type="Node3D"]
+script = ExtResource("1_d3apr")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("2_xjwua")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.47605276)
+shape = SubResource("BoxShape3D_d3apr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.79114884, 0.6116237, 0, -0.6116237, 0.79114884, 0, 6.187498, 12.39701)

@@ -1,0 +1,119 @@
+[gd_scene load_steps=13 format=3 uid="uid://ca75qt25acymh"]
+
+[ext_resource type="Material" uid="uid://cybwkaq5r3uj3" path="res://AmbientCG/Downloads/Grass0011K-JPG/Grass001.material" id="1_kt0x1"]
+[ext_resource type="Material" uid="uid://b1x7m24135vn8" path="res://AmbientCG/Downloads/Ground0681K-JPG/Ground068.material" id="2_vjurl"]
+[ext_resource type="Material" uid="uid://fjo73bhk4t5y" path="res://AmbientCG/Downloads/Ground0811K-JPG/Ground081.material" id="3_6b536"]
+[ext_resource type="Material" uid="uid://d2uh8unco4lb4" path="res://AmbientCG/Downloads/Ice0031K-JPG/Ice003.material" id="4_3ih72"]
+[ext_resource type="Material" uid="uid://b0nsyxxbyopfm" path="res://AmbientCG/Downloads/Marble0131K-JPG/Marble013.material" id="5_ad4bk"]
+[ext_resource type="Material" uid="uid://v26dw37gnhs0" path="res://AmbientCG/Downloads/Rock0291K-JPG/Rock029.material" id="6_vd0t2"]
+[ext_resource type="Material" uid="uid://dp0jnrq6o3hg8" path="res://AmbientCG/Downloads/Rock0341K-JPG/Rock034.material" id="7_d05cn"]
+[ext_resource type="Material" uid="uid://dx0smfo4hc6ff" path="res://AmbientCG/Downloads/Rock0561K-JPG/Rock056.material" id="8_3mj0l"]
+[ext_resource type="Material" uid="uid://dbt7odv6ajn0l" path="res://AmbientCG/Downloads/Rocks0111K-JPG/Rocks011.material" id="9_he8i3"]
+[ext_resource type="Material" uid="uid://cefmb6qep2v1m" path="res://AmbientCG/Downloads/ScatteredLeaves0011K-JPG/ScatteredLeaves001.material" id="10_82ujh"]
+[ext_resource type="Material" uid="uid://bvfwva05t1t4e" path="res://AmbientCG/Downloads/ScatteredLeaves0041K-JPG/ScatteredLeaves004.material" id="11_qhwv7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pskdv"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_pskdv")
+surface_material_override/0 = ExtResource("1_kt0x1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8037136, 0, 0)
+mesh = SubResource("BoxMesh_pskdv")
+surface_material_override/0 = ExtResource("2_vjurl")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5931566, 0, 0)
+mesh = SubResource("BoxMesh_pskdv")
+surface_material_override/0 = ExtResource("3_6b536")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.39687, 0, 0)
+mesh = SubResource("BoxMesh_pskdv")
+surface_material_override/0 = ExtResource("4_3ih72")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6320183)
+mesh = SubResource("BoxMesh_pskdv")
+surface_material_override/0 = ExtResource("5_ad4bk")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8037136, 0, -1.6320183)
+mesh = SubResource("BoxMesh_pskdv")
+surface_material_override/0 = ExtResource("6_vd0t2")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5931566, 0, -1.6320183)
+mesh = SubResource("BoxMesh_pskdv")
+surface_material_override/0 = ExtResource("7_d05cn")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.39687, 0, -1.6320183)
+mesh = SubResource("BoxMesh_pskdv")
+surface_material_override/0 = ExtResource("8_3mj0l")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09122038, 0, -3.2640367)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D8")
+surface_material_override/0 = ExtResource("9_he8i3")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8949337, 0, -3.2640367)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D8")
+surface_material_override/0 = ExtResource("10_82ujh")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6843767, 0, -3.2640367)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D8")
+surface_material_override/0 = ExtResource("11_qhwv7")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4880905, 0, -3.2640367)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D8")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10261774, 0, -4.835365)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D8")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9063311, 0, -4.835365)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D8")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.695774, 0, -4.835365)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D8")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.499488, 0, -4.835365)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D8")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19383812, 0, -6.4673834)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D16")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9975514, 0, -6.4673834)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D16")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7869945, 0, -6.4673834)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D16")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5907083, 0, -6.4673834)
+mesh = SubResource("BoxMesh_pskdv")
+skeleton = NodePath("../MeshInstance3D16")

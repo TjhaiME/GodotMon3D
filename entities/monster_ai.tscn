@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://2emi8kcub5yy"]
+
+[ext_resource type="Script" uid="uid://701frke267gf" path="res://entities/monster_ai.gd" id="1_nh25q"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h3qnb"]
+height = 10.0
+radius = 10.0
+
+[node name="MonsterAI" type="Node3D"]
+script = ExtResource("1_nh25q")
+
+[node name="AlertArea" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AlertArea"]
+shape = SubResource("CylinderShape3D_h3qnb")
+
+[connection signal="body_entered" from="AlertArea" to="." method="_on_alert_area_entered"]
+[connection signal="body_exited" from="AlertArea" to="." method="_on_alert_area_exited"]

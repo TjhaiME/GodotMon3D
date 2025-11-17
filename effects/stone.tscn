@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://tlmrla6sbghy"]
+
+[ext_resource type="Texture2D" uid="uid://dpjpsal6e0ie5" path="res://addons/kenney_particle_pack/dirt_03.png" id="1_r241s"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8e3xn"]
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+inherit_velocity_ratio = 1.0
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 0.099999994
+initial_velocity_max = 0.75
+gravity = Vector3(0, -1, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 2.9999976
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = 0.99999774
+scale_max = 3.0
+scale_over_velocity_max = 10.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+collision_use_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cd41b"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.31, 0.16089001, 0.06820001, 1)
+albedo_texture = ExtResource("1_r241s")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tv32r"]
+material = SubResource("StandardMaterial3D_cd41b")
+
+[node name="Water" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.23131394, 0)
+visibility_range_fade_mode = 1
+amount = 20
+amount_ratio = 0.8052
+lifetime = 1.5
+randomness = 0.34
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_8e3xn")
+draw_pass_1 = SubResource("CapsuleMesh_tv32r")

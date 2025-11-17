@@ -1,0 +1,285 @@
+STRUCTURE OF PROJECT:
+	There is a singleton res://scripts/globalSingelton.gd
+	that is autoloaded before the project launches
+	the project launches/starts in res://UI/mainMenu.tscn
+	then when prompted loads:
+	res://master_node.tscn which is the main scene that handles everything
+	it handles controlling the characters with controllers and everything
+	as well as many functions that control lower nodes
+	it spawns a monster for each player res://entities/controllableMonster.tscn
+	and also assigns the input controller for each player located in res://controllers/ (just allows us to use same code for all players, possibly redundant but works)
+
+	the attack/move database is in this script res://data/moves.gd (it is attached as a child to the masterNode)
+	look for the scene entry and go to those scenes to see an example of it being implemented.
+	the hitbox of each attack is either res://attacks/attack.gd, or inherits from it.
+	the parent node usually still has to set some variables for this to all work
+	
+	
+	FOLDER STRUCTURE:
+		addons
+			addons for godot
+		AmbientCG
+			cc0 textures downloaded using an addon for godot
+		assets
+			where I put all my assets I download from elsewhere
+		attacks
+			all the attacks, and effects for attacks
+		controllers
+			code and scenes for giving different button control to differernt players
+		data
+			monsterDex.csv and moves.gd (eventually will be a csv file too probably)
+		effects
+			materials/effects etc that thought shouldnt be in attacks folder...for some reason idk
+		entities
+			stuff to do with the characters you control
+		scripts
+			for other scripts that dont fit elsewhere
+		UI
+			to do with the UI for the game
+		world
+			destructable terrain, terrain effect area (weather effects that overlay terrain and change with terrain when it is destroyed)
+
+
+todo
+AI
+fix ai so its not over the top (give it some delays)
+
+DAMAGE
+actually implement guarding damage reduction 
+
+
+ANIMATION
+add other animations, punch (endhalfway while charging, then release) same as weapon
+all monsters have animations, make them walk and run etc.
+make animations actually play if they exist.
+make the wind up segment of animations play at various speeds to match attack wind up times
+actually make attacks not trigger until after the wind up animation is completed
+
+STAMINA and CONTROLS
+make moves actually reduce stamina, implement a running feature
+fix jumping to come from a jump button, give it directional input at least when rising, if we land on a wall, we enter climb mode as long as the input is pressed up or we get to the top/noo longer on wall.
+did we implement stamina usage for all things (running, climbing, dodging, guarding)
+change climbing so it activates if we land on a wall after jumping
+so dodge and jump must be different as one os on the ground and other needs direction for the air.
+may also need a run button.
+death anim (it should be switchin to it but it seems to get immediately overridden)
+a signal for anim ended could be sueful
+if some animations are playing we want them to finish before swapping
+jumping
+implemnent guard should take styamina to be effective
+seperate dodge and jump, both should need stamina to be effective (to go far), maybe even charging if needed
+implement run and run animation (done)
+implement "no" headshake animation if something attempted while cooling down
+
+MENU
+(optional show type chart on main menu too) (add opttions to change damage)
+add a move changing screen (perhaps to the monster menu)
+#ui viewports for splitscreen dont rescale
+
+MODELS
+the model should have a scale of 0.5 on every quaternius model, re do in blender to remove this
+on import I set the looping animations to loop (this might be annoying when we get a lot)
+
+
+ui has been changed to be more rescalable
+change it again to use the empty corner spaces to display hp.stamina and status in pie charts
+
+it now works in split screen somewhat, still needs to be rescaled.
+also when we attack we need to update not just the players who have that enemys hp as their activeenemyHP
+but , YET TO DO, we also need to update other players in that position and the enemies "myHP" itself (e.g. for splitscreen)
+
+need to make another attack type that does damage every second it is inside an area,
+or to launch multiple areas
+beams shouldnt disappear when they hit a player only go through
+#we have an ignore_floor tag we need an ignore player tag
+#we still need more general attacks
+#like beam it has a function that changes to look based on the element, this needs to be a thing for other attacks too
+#signal for attack to work is now connected from the hitboxes code to the hitbox it self
+
+
+
+
+
+#doing:
+	#working on res://attacks/effects/newBeamEffect.tscn
+	I have a beam for each element now we need to have a beam atack loader that knows which one it wants to load.
+	to make all beam types using these
+	that is long and straight
+	short and dynamic
+	charge radius eyc
+
+
+##USAGE NOTES:
+	attacks require an areanode to be a hitbox
+	the main attack script is an extension of this
+	it is pllace on the hitbox and can drive the parent
+	it can also be used to drive the player (e.g. slam attacks)
+	
+	most the code can be done on the hitbox it self, so that attacks can be changed just through data
+	but since it is just code I am trying to avoid hardcoded node paths
+	visual updates require a needsNeedsUpdate = true variable and then needsUpdate will be set to true when it is needed.
+	and the upeerscripts will have to handle it.
+	we can do most changes just by changing the atkData dictionary, it is duplicated so it doesnt change the original.
+	so every move has its on dictionary that can be modified as it charges and stuff
+	
+	attacks that move the monster also need a melee var in atkData so we can know to spawn it as a child of the monster, not on the attacks node.
+	
+	
+	#generic simple cooldown is not good
+	# we want like a mana pool for each move
+	#so we can have moves like bullet seed where you conserve cooldown/pp
+	#make them 100
+	#each move (that cant be re used immeidately) uses more than 50
+
+##TODO:
+	
+	#need a "when hit floor do this"
+	#need a "when hit player do this"
+	so we can handke things like placing hazards and knockback effects etc
+	#we also need a mechanism to drain health
+	
+	##problem:
+		knockback isnt working at all
+	
+	Need a menu to select from split screen or single player.
+	need ability to choose party and edit moves etc.
+	or rogue mode
+	
+	quick battle
+		single player (vs ai)
+			choose battle terrain
+				list of 4 colours [bottom, mid, top, slope]
+			choose extras
+				not sure yet, stuff like weather effects and random power ups or drop rates etc.
+			set up p1 monsters and moves
+				monster choosing screen (no dataset to implement yet)
+				move choosing screen (moves in masterRefNode.get_node("AttacksData").moveData, move names are the keys)
+		split screen
+			choose battle terrain
+			choose extras
+			set up p1 monsters and moves
+			set up p2 monsters and moves
+		network multiplayer (ignore for now)
+			choose desired battle terrain
+			choose desired extras
+			set up p1 monsters and moves
+	rogue mode (ignore for now)
+		similar we need to choose singleplayer, splitscreen or multiplayer etc.
+		then it goes into the other screens
+		probably need something else too.
+	
+	then we spawn masterNodeRef and go to it with the appropriate variables/nodes etc
+	
+	#we have a method osf having multiple layers now, but now many variables are stored on the player
+	#not on the masterRefNode, so we get functions to get these trhings
+	#like masterRefNode.get_player_var(playerID,"previous_controller")
+	DONE
+	
+	#we make a camera for each player in split screen mode.
+	we want the camera to be in a certain pos, relative to the monster, like birds eye view above
+	always trying to be X units above the terrain and player.
+	give players a reference to the camera so they can move it or leave it as null
+	DONE
+	
+	
+	we changed slam to a hitbox driven attack, but now it is not physical as it is not a characterbody.
+
+A better pysical/special system
+all moves do both physical and elemental (special damage)
+like elemental defenses (NOT IMPLEMENTED YET)
+
+
+the master_node handles everything
+attacksData is attached to a node underneath it
+the element tableis in there too
+
+players and monsters and controllable moves all share certain variables required to switch control from one to another.
+the master node handles the switching.
+this way when a monster attacks it leaves you standing there but you can control the move.
+
+hold the button when you do an attack, enter held button attack state, release enters release button attack state.
+e.g. changing direction of a punch.
+
+
+each move is either physical or special (summonable)
+for the purposes of phys/spc atk/def, Area nodes are special and physical nodes like character bodies are physical.
+special attacks can go through obstacles in the terrain, physical attacks move obstacles on the terrain
+if an attack is tagged as physical that means it uses the character to move instead of summoning a visual
+
+dodge could work like a physical attack but with invincibility frames.
+
+
+still need the damage system to handle both bodies and areas, with special and physical attack.
+the attack of the attacker wil have to be recorded in the power of the attack so it can be seen by the defender.
+
+
+status system
+poison = take damage periodically
+paralyse = flinch periodically
+burn = random take damage or flinch periodically
+frozen and sleep = immobile but wake up quicker when hit with physical or special
+frozen hit with special wakes you up faster but does more dmaage or something
+sleep hit with physical wakes you up faster but does more damage or something
+each tick we check if we should wake up with a random chance, but the chance gets higher as we are stuck in the state so it has a high chance of opening after a little bitt
+
+
+
+destructable/moveable terrain and elemental terrain
+
+you should be able to damage and move the terrain around and use it to block attacks or bounce attacks of walls etc
+you should also be able to attack the floor with elemental attacks,
+when you stand there and use the same type attack you get a boost, but if you get hit with a move that that type is weak to you get hit for more damage
+you can also make hazards that damage enemies as they walk past
+
+we still need destructable terrain, or a changeable battlefield
+DONE:
+	res://world/destructableTerrain.tscn
+we have destrubtable terrain, it is coloured based on angle and a base colour
+TODO:
+	add colours based on height layers for each level type (e.g. grass into dirt into stone)
+
+
+
+
+collision has been changed to be simper with layer structure so its easier to port this into another game
+layer 1 : monsters
+layer 2 : attacks
+layer 9 : floor
+
+
+
+
+#########################
+to do
+
+
+bugs:
+	slam sometimes goes in the wrong direction
+	#fixed, it wasnmt seting last velocity when we didnt put input into held attack mode
+	#just shitty fix for now added an else statement that gives it a forward velocity
+	sometimes the enemy monster targets it self, that is targetEnemy = monsterNode on the monster_ai script
+	#ui viewports for splitscreen dont rescale
+	
+
+
+
+
+############################################################ \
+
+How to make level ups feel personal without ruining the game.
+when we do certain tasks we get a boost to that skill when levelling up like morrowind
+this ruins morrowind when you min max
+so instead we make it so it takes away from a total amount you can get, so even if you dont use them, you just have to keep levelling up to get
+all your boosts.
+
+#########################################################3
+
+More than 4 moves?
+we have ABXY Dodge (L or R) and 1 analog stick
+we reserve the other stick for camera
+we still have R or L
+and L2 R2
+
+we can have 4 moves for when we are in the air or underground etc
+we can also have another 4 moves when we are holding one of those buttons
+ignore for now

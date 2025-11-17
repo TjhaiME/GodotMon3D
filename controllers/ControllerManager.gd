@@ -1,0 +1,610 @@
+#ambientCG textures used in beams
+#rock 0291k
+#grass-0011k
+#ice-0031k
+#ice-003_1k
+
+
+
+extends Node3D
+
+
+
+
+
+##########
+####################
+##############################
+########################################
+##################################################
+############################################################
+######################################################################
+#          variables
+######################################################################
+############################################################
+##################################################
+########################################
+##############################
+####################
+##########
+
+#@export var input_provider_scene: PackedScene
+@export var player_count: int = 2
+
+var use_split_screen: bool = false#false # toggle for split-screen
+
+
+var ui_scene = preload("res://UI/monsterUI.tscn")
+
+
+var playerIsHuman = []#array of true false values, human is true
+#var humanOrCpuDefault = [true, false, false, false]#etc
+
+var players: Array = [] # holds dictionaries: {index, input_provider, current_controller, previous_controller, camera, viewport, container}
+
+var monsterData = {
+	#0 : {
+		#"element1" : "Wind",
+		#"element2" : "Fire",
+		#
+		##STATUS EFFECTS:
+		#"ailment" : 0,##0 is none, see above
+		#"ailCount" : 0.0,#a float to record or healing process
+		#"ailTimer" : 0.0,#a float for recording the periodic timer for status effects, (we can increase it by random intervals each frame)
+		#
+		#"HP" : 150,
+		#"maxHP" : 150,
+		#"physAtk" : 75,
+		#"physDef" : 75,
+		#"spclAtk" : 75,
+		#"spclDef" : 75,
+		#"speed" : 75, #increases evade distance too
+		#"evasion" : 75,
+		##stranger stats
+		#"climb" : 45.0, #allows us to walk up steeper hills
+		#
+		#"moves" : {
+	#}
+}
+
+var loadedMonsters = []
+
+
+##########
+####################
+##############################
+########################################
+##################################################
+############################################################
+######################################################################
+#           control
+######################################################################
+############################################################
+##################################################
+########################################
+##############################
+####################
+##########
+
+###########################################################
+# CONTROL SWITCHING
+###########################################################
+func set_control(new_controller, player_index: int = 0):
+	if player_index < 0 or player_index >= players.size():
+		push_warning("Invalid player index: %d" % player_index)
+		return
+
+	var player = players[player_index]
+	var current_controller = player["current_controller"]
+
+	if current_controller:
+		current_controller.is_controlled = false
+		player["previous_controller"] = current_controller
+
+	player["current_controller"] = new_controller
+	new_controller.is_controlled = true
+	new_controller.playerID = player_index
+
+	if new_controller.has_method("on_set_control"):
+		new_controller.on_set_control()
+
+
+#########################################
+#   PRocess and helper functions
+#######################################
+
+###########################################################
+# MAIN LOOP
+###########################################################
+func _physics_process(delta):
+	for player_data in players:
+		var controller = player_data["current_controller"]
+		var provider = player_data["input_provider"]
+		if not controller or not provider:
+			continue
+		var input_data = provider.get_input_data()
+		controller.handle_input(delta, input_data)
+
+
+################################################################
+## UI UPDATES (Shared)
+################################################################
+
+func get_player_var(player_index: int, variable_name: String):
+	if player_index < 0 or player_index >= players.size():
+		if player_index != -1:#ai has player index of -1
+			push_warning("Invalid player index: %d" % player_index)
+		return null
+	return players[player_index].get(variable_name, null)
+
+func get_player_camera(player_index: int):
+	#return players[player_index]["camera"]
+	return get_player_var(player_index, "camera")
+#
+
+
+##########
+####################
+##############################
+########################################
+##################################################
+############################################################
+######################################################################
+#           initialisation
+######################################################################
+############################################################
+##################################################
+########################################
+##############################
+####################
+##########
+
+func set_up_stats_from_base_stats(baseStats):
+	#baseStats["maxStamina"]
+	var fullStats = {
+		"name" : "",
+		"stamina": baseStats["maxStamina"],
+		"HP" : baseStats["maxHP"],
+		#STATUS EFFECTS:
+		"ailment" : 0,##0 is none, see above
+		"ailCount" : 0.0,#a float to record or healing process
+		"ailTimer" : 0.0,#a float for recording the periodic timer for status effects, (we can increase it by random intervals each frame)
+		
+	}
+	
+	var newDic = baseStats.duplicate(true)
+	for key in fullStats.keys():
+		
+		#if "baseStats" already has these values it means we loaded a full pokeymans object from a file
+		if newDic.has(key):
+			continue
+		
+		if typeof(fullStats[key]) == TYPE_DICTIONARY:
+			newDic[key] = fullStats[key].duplicate()
+		else:
+			newDic[key] = fullStats[key]
+	return newDic
+	#"stamina
+	#"maxStamina
+	#"stamRegen
+
+
+
+
+
+func set_up_monster(index):
+	
+	var monsterPath = "res://entities/controllableMonster.tscn"
+	var monster = load(monsterPath).instantiate()
+	monster.masterNodeRef = self
+	$Entities.add_child(monster)
+	monster.global_transform.origin += Vector3(index, 3.0, index)
+	
+	monster.stats = set_up_stats_from_base_stats(monsterData[index])
+	#if p1MonsterName != "":
+		#$Entities/Player.stats["species"] = p1MonsterName
+	monster._stats_were_set()
+
+	
+	monster.teamID = index
+	monster.name = str("Player",index)
+	if index == 0:
+		monster.name = "Player"
+	print("player1 = ", monster)
+	print("player1 team = ",monster.teamID)
+	
+	loadedMonsters.append(monster)
+
+
+func _ready():
+	print("ControllerManager ready — players:", player_count, " splitScreen:", use_split_screen)
+
+	# Preload input providers
+	var input_p1_scene = preload("res://controllers/p1InputProvider.tscn")
+	var input_p2_scene = preload("res://controllers/p2InputProvider.tscn")
+
+	# Create per-player data
+	for i in range(player_count):
+		var provider
+		if i == 0:
+			provider = input_p1_scene.instantiate()
+		elif i == 1:
+			provider = input_p2_scene.instantiate()
+		else:
+			# fallback, in case more players later
+			
+			provider = input_p1_scene.instantiate()
+			#provider = input_provider_scene.instantiate()
+
+		add_child(provider)
+
+		var player_data = {
+			"index": i,
+			"input_provider": provider,
+			"current_controller": null,
+			"previous_controller": null,
+			"camera": null,
+			"viewport": null,#the viewport for seeing the screen
+			"container": null,
+			"uiViewport": null, #the viewport for seeing the GUI
+			"uiMesh": null#the mesh for displaying the GUI
+		}
+		players.append(player_data)
+
+
+
+	for index in range(monsterData.size()):
+		set_up_monster(index)
+	
+
+	# Assign test controllers (your existing nodes)
+	if players.size() > 0 and has_node("Entities/Player"):
+		#$Entities/Player.masterNodeRef = self
+		set_control($Entities/Player, 0)
+		
+	if players.size() > 1 and has_node("Entities/Player2"):
+		#$Entities/Player2.masterNodeRef = self
+		set_control($Entities/Player2, 1)
+	
+	
+	# Setup split-screen only if enabled
+	if use_split_screen:
+		_setup_split_screen()
+		#player data is set up in the above function
+		#get the singleplayer uiMeshs transform relative to it's camera
+		
+	else:
+		
+		var ui1 = ui_scene.instantiate()
+		$SubViewport.add_child(ui1)
+		ui1.name = "UIControl"
+		## Apply SubViewport texture to mesh if used
+		var mat = $FreeCam/MeshInstance3D.get_active_material(0)
+		mat.albedo_texture = $SubViewport.get_texture()
+		players[0]["camera"] = $FreeCam
+		players[0]["uiMesh"] = $FreeCam/MeshInstance3D
+		players[0]["uiViewport"] = $SubViewport
+
+
+	#updating attack icons
+	update_attack_icons($Entities/Player, 0)
+	
+	
+	var AINodePreload = load("res://entities/monster_ai.tscn")
+	for index in range(playerIsHuman.size()):
+		var val = playerIsHuman[index]
+		print("player ", index, "is human? ", val)
+		if val == false:
+			#var monsterAIPath = "res://entities/monster_ai.tscn"
+			var monsterNode = loadedMonsters[index]
+			var AINode = AINodePreload.instantiate()
+			monsterNode.add_child(AINode)
+			monsterNode.cpuAiNode = AINode
+			#print("player ", index, "is human? ", val)
+	
+
+
+###########################################################
+# SPLIT SCREEN SETUP (only for extra player)
+###########################################################
+
+##########
+####################
+##############################
+########################################
+##################################################
+############################################################
+######################################################################
+#           SPLIT SCREEN SETUP (only for extra player)
+######################################################################
+############################################################
+##################################################
+########################################
+##############################
+####################
+##########
+
+func _setup_split_screen():
+	var ui_layer = CanvasLayer.new()
+	ui_layer.name = "SplitScreenLayer"
+	add_child(ui_layer)
+
+	var oldMesh = $FreeCam/MeshInstance3D
+	var oldViewport = $SubViewport
+	
+	
+	for i in range(players.size()):
+		var player = players[i]
+
+		# create viewport
+		var viewport = SubViewport.new()
+		viewport.size = get_viewport().get_visible_rect().size
+		viewport.size.x = 0.5*viewport.size.x
+		viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+		add_child(viewport)
+		player["viewport"] = viewport
+
+		# create dedicated camera for this viewport
+		var camera = Camera3D.new()
+		camera.name = "PlayerCamera_%d" % i
+		camera.current = true
+		viewport.add_child(camera)
+		player["camera"] = camera
+
+		# create TextureRect to show viewport on screen
+		var container = TextureRect.new()
+		container.texture = viewport.get_texture()
+		container.stretch_mode = TextureRect.STRETCH_SCALE
+		container.anchor_left = 0
+		container.anchor_right = 1
+		container.anchor_top = 0
+		container.anchor_bottom = 1
+		container.offset_left = 0
+		container.offset_right = 0
+		container.offset_top = 0
+		container.offset_bottom = 0
+		ui_layer.add_child(container)
+		player["container"] = container
+	
+	
+	
+	#EXTRA ADD VIEWPORTS FOR UI
+		#mke a new mesh
+		
+		var uiTForm = oldMesh.transform
+		var uiMeshInst = oldMesh.duplicate()
+		
+		
+		#var mesh = uiMeshInst.mesh
+		var matDup = uiMeshInst.get_active_material(0).duplicate()
+		uiMeshInst.set_surface_override_material(0, matDup)
+		
+		
+		#var player1Data = players[0]
+		player["camera"].add_child(uiMeshInst)
+		uiMeshInst.transform = uiTForm
+		player["uiMesh"] = uiMeshInst
+		
+		#make a new viewport
+		
+		#var uiViewport = oldViewport.duplicate()
+		var uiViewport = SubViewport.new()
+		var newViewportSizeX = 600#int(floor(float(1200)/float(players.size())))
+		print("newViewportXsize = ", newViewportSizeX)
+		var newViewportSizeVec = Vector2i(newViewportSizeX, 650)
+		uiViewport.size = newViewportSizeVec
+		add_child(uiViewport)
+		var ui_instance = ui_scene.instantiate()
+		#ui_instance.size = newViewportSizeVec
+		uiViewport.add_child(ui_instance)
+		
+		ui_instance.name = "UIControl"
+		#viewport.add_child(uiViewport)
+		add_child(uiViewport)#uiViewport doesnt work if outside the viewport apparently, but this made no difference to us
+		player["uiViewport"] = uiViewport
+		#uiViewport.pause_mode = Node.PAUSE_MODE_PROCESS
+		#uiViewport.render_target_update_mode = SubViewport.UpdateMode.UPDATE_ALWAYS
+		
+		##TODO
+		#need to set up to show characters data and moves properly
+		
+		var mat = uiMeshInst.get_active_material(0)
+		mat.albedo_texture = uiViewport.get_texture()
+		
+		
+	
+
+
+
+
+	oldMesh.queue_free()
+	oldViewport.queue_free()
+
+	_layout_split_screen()
+
+
+func _layout_split_screen():
+	if players.size() == 1:
+		var rect = players[0]["container"]
+		rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+		return
+
+	var count = players.size()
+	for i in range(count):
+		var rect = players[i]["container"]
+		rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		rect.anchor_left = float(i)/count
+		rect.anchor_right = float(i+1)/count
+		rect.anchor_top = 0.0
+		rect.anchor_bottom = 1.0
+		rect.offset_left = 0
+		rect.offset_right = 0
+		rect.offset_top = 0
+		rect.offset_bottom = 0
+
+
+
+##########
+####################
+##############################
+########################################
+##################################################
+############################################################
+######################################################################
+#           UI
+######################################################################
+############################################################
+##################################################
+########################################
+##############################
+####################
+##########
+
+
+##AFTER UI UPDATE:
+func refresh_player_ui(playerID: int = 0):
+	#maybe this should be a tag that gets updated so it only happens once per frame
+	var mat = players[playerID]["uiMesh"].get_active_material(0)
+	var subViewport = players[playerID]["uiViewport"]
+	mat.albedo_texture = subViewport.get_texture()
+
+func update_attack_icons(monsterNode, playerID: int = 0):
+	var myMoveDic = monsterNode.stats["moves"]
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	for buttChar in ["A", "B", "X", "Y"]:
+		var pathAlpha = "UIControl/HBoxUI/Moves/GridContainer/"
+		var pathOmega = "/Icon"
+		var textureRectNode = subViewport.get_node(str(pathAlpha, buttChar, pathOmega))
+		var moveName = myMoveDic[buttChar]
+		var iconPath = $AttacksData.moveData[moveName]["icon"]
+		textureRectNode.texture = load(iconPath)#will this work?
+	
+	refresh_player_ui(playerID)
+
+func update_chars_hp_bars(myCharRef):
+	#better method, works for any nodes even those without hp bars
+	var shouldUpdate = false
+	var playerID = myCharRef.playerID
+	var enemyCharRef = myCharRef.lastHitEnemy
+	
+	if playerID == -1:
+		#I dont have a player assigned so I dont have a ui that needs rendering
+		return
+	
+	
+	
+	if use_split_screen == true:
+		if playerID >= 0 and playerID < players.size():
+			shouldUpdate = true
+	else:
+		if playerID == 0:
+			shouldUpdate = true
+	#instead of telling it the stats we should just update all of them and remember who our tergetted enemy is
+	##TODO replace myStats and enemyStats with references to the nodes
+	if shouldUpdate == false:
+		return
+		
+		
+	
+	var myStats = myCharRef.stats
+	
+	
+	#for playerID in range(players.size()):
+		##var uiViewport = players[playerID]["uiViewport"]
+		#
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	#we need to get the lower hps size and adjust the other one based on it, in case we have resized
+	
+	var maxSizeX = subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP/hpUnder").size.x
+	var myHPratio = maxSizeX * float(myStats["HP"]) / float(myStats["maxHP"])
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP/hpAbove").size.x = myHPratio
+	#subViewport.get_node("HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP/hpAbove").position.x = maxSizeX - myHPratio
+
+	var myNameLabel = myStats["name"]
+	if myStats["name"] == "":
+		myNameLabel = myStats["species"]
+	
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP/Label").text = str(myNameLabel, " HP: ", myStats["HP"])#str(myStats["HP"], " HP")
+
+	#STAMINA
+	#var maxSizeX = subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/myStamina/staminaUnder").size,x
+	var staminaBar = subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/myStamina/staminaAbove")
+	var myStamRatio = maxSizeX * float(myStats["stamina"]) / float(myStats["maxStamina"])
+	staminaBar.size.x = myStamRatio
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/myStamina/Label").text = str(myStats["stamina"], " Stamina")
+	
+
+	if enemyCharRef:
+		if is_instance_valid(enemyCharRef):
+			var enemyStats = enemyCharRef.stats
+			subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/enemiesHP/enemy_hpAbove").size.x = maxSizeX * float(enemyStats["HP"]) / float(enemyStats["maxHP"])
+			var enemyNameLabel = enemyStats["name"]
+			if enemyStats["name"] == "":
+				enemyNameLabel = enemyStats["species"]
+			subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/enemiesHP/Label").text = str(enemyNameLabel, " HP: ", enemyStats["HP"])
+	
+
+	
+	refresh_player_ui(playerID)
+#
+#func update_chars_stamina_bar(myCharRef):
+	#refresh_player_ui(playerID)
+
+func update_hp_bars(myStats, enemyStats, playerID: int = 0):
+	
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	#we need to get the lower hps size and adjust the other one based on it, in case we have resized
+	
+	var maxSizeX = subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/enemiesHP/enemy_hpUnder").size.x
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/enemiesHP/enemy_hpAbove").size.x = maxSizeX * float(enemyStats["HP"]) / float(enemyStats["maxHP"])
+	var myHPratio = maxSizeX * float(myStats["HP"]) / float(myStats["maxHP"])
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP/hpAbove").size.x = myHPratio
+	#subViewport.get_node("HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP/hpAbove").position.x = maxSizeX - myHPratio
+	var enemyNameLabel = enemyStats["name"]
+	if enemyStats["name"] == "":
+		enemyNameLabel = enemyStats["species"]
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/enemiesHP/Label").text = str(enemyNameLabel, " HP: ", enemyStats["HP"])
+	
+	var myNameLabel = myStats["name"]
+	if myStats["name"] == "":
+		myNameLabel = myStats["species"]
+	
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP/Label").text = str(myNameLabel, " HP: ", myStats["HP"])#str(myStats["HP"], " HP")
+	
+	refresh_player_ui(playerID)
+
+func update_cooldown_labels(buttonChar: String, value, playerID: int = 0):
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	var labelPath = str("UIControl/HBoxUI/Moves/GridContainer/",buttonChar.to_upper(),"/MP")
+	var formattedVal = str(value).substr(0,4)
+	subViewport.get_node(labelPath).text = str(formattedVal, "%")
+	
+	refresh_player_ui(playerID)
+
+
+
+func update_generalCooldown_lock_visual(ifVisible: bool, playerID: int = 0):
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	subViewport.get_node("UIControl/HBoxUI/Moves/GridContainer/TL/lockVisual").visible = ifVisible
+	
+	refresh_player_ui(playerID)
+
+func update_generalCooldown_lock_visual_SAFE(ifVisible: bool, playerID: int = 0):
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	var current = subViewport.get_node("UIControl/HBoxUI/Moves/GridContainer/TL/lockVisual").visible
+	if current != ifVisible:
+		subViewport.get_node("UIControl/HBoxUI/Moves/GridContainer/TL/lockVisual").visible = ifVisible
+	
+	refresh_player_ui(playerID)

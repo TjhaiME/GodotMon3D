@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://csi0a406axewm"]
+
+[ext_resource type="PackedScene" uid="uid://j6fsewaefmm1" path="res://attacks/beams/beamAttack.tscn" id="1_jwdhx"]
+[ext_resource type="Script" uid="uid://dxoryakgq2r7e" path="res://attacks/effects/beamBreathOverride.gd" id="2_xti6m"]
+
+[node name="BeamBreath" type="Node3D"]
+
+[node name="beamEffectParent" parent="." instance=ExtResource("1_jwdhx")]
+script = ExtResource("2_xti6m")

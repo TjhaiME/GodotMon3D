@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://11wr0e1f38i1"]
+
+[ext_resource type="Texture2D" uid="uid://do1o36cvfok3x" path="res://AmbientCG/Downloads/Ice0031K-JPG/Ice003_1K-JPG_Color.jpg" id="1_yoigq"]
+[ext_resource type="Texture2D" uid="uid://cpr8qhsh3kh5l" path="res://AmbientCG/Downloads/Ice0031K-JPG/Ice003_1K-JPG_Displacement.jpg" id="2_wh07i"]
+[ext_resource type="Texture2D" uid="uid://cyjturs3s6rhf" path="res://AmbientCG/Downloads/Ice0031K-JPG/Ice003_1K-JPG_NormalGL.jpg" id="3_j4q7o"]
+[ext_resource type="Texture2D" uid="uid://bb6vwcddk56cn" path="res://AmbientCG/Downloads/Ice0031K-JPG/Ice003_1K-JPG_Roughness.jpg" id="4_e3ath"]
+
+[resource]
+transparency = 1
+albedo_color = Color(0.27450982, 1, 1, 1)
+albedo_texture = ExtResource("1_yoigq")
+metallic = 1.0
+metallic_texture = ExtResource("2_wh07i")
+roughness_texture = ExtResource("4_e3ath")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("3_j4q7o")
+heightmap_enabled = true
+heightmap_scale = 1.0

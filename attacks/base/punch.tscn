@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://3xqtxjp1w48f"]
+
+[ext_resource type="Script" uid="uid://b647ecfrsnmnn" path="res://attacks/base/punchTransition.gd" id="1_7kiqp"]
+[ext_resource type="Script" uid="uid://ctpp0tfkdeujc" path="res://attacks/attack.gd" id="2_7kiqp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7kiqp"]
+size = Vector3(2, 1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7kiqp"]
+resource_local_to_scene = true
+size = Vector3(0.8842163, 0.47631836, 1.2363281)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jgf4i"]
+resource_local_to_scene = true
+size = Vector3(0.93418884, 0.5073242, 0.44647217)
+
+[node name="Punch" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 259
+script = ExtResource("1_7kiqp")
+
+[node name="model" type="Node3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0.5204823)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.114998, 0.42461187, -1.0451441)
+mesh = SubResource("BoxMesh_7kiqp")
+
+[node name="effect" type="Node3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05331421, 0.16760254, 0.11816406)
+shape = SubResource("BoxShape3D_7kiqp")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 259
+script = ExtResource("2_7kiqp")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04433441, 0.16308594, 0.5278015)
+shape = SubResource("BoxShape3D_jgf4i")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_attack_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_attack_body_entered"]

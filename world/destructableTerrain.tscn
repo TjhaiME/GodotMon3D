@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://5g0dmef74csg"]
+
+[ext_resource type="Script" uid="uid://coy2vpccash1i" path="res://world/destructable_terrain.gd" id="1_l37l7"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_n2lua"]
+
+[node name="DestructableTerrain" type="StaticBody3D"]
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("1_l37l7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_n2lua")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

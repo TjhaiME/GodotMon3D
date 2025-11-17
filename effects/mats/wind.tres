@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ms2niwdayxyo"]
+
+[ext_resource type="Texture2D" uid="uid://ct6jsbftp2etn" path="res://addons/kenney_particle_pack/smoke_08.png" id="1_sdxh0"]
+[ext_resource type="Texture2D" uid="uid://tysitinui383" path="res://addons/kenney_particle_pack/smoke_09.png" id="2_7gtou"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.3882353, 0.8784314, 1, 0.19215687)
+albedo_texture = ExtResource("1_sdxh0")
+emission_enabled = true
+emission = Color(0.58431375, 1, 1, 1)
+emission_energy_multiplier = 0.49
+emission_texture = ExtResource("2_7gtou")

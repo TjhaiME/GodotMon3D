@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://c860w0ycg0d4o"]
+
+[ext_resource type="Script" uid="uid://bhuxbqrrhya70" path="res://attacks/base/spikes.gd" id="1_nj2my"]
+[ext_resource type="Script" uid="uid://ctpp0tfkdeujc" path="res://attacks/attack.gd" id="2_eo856"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nj2my"]
+top_radius = 0.0
+bottom_radius = 0.75
+height = 3.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cx254"]
+resource_local_to_scene = true
+size = Vector3(0.55392456, 1.28656, 0.6179199)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btgyx"]
+resource_local_to_scene = true
+size = Vector3(0.6111212, 0.3260498, 0.67128754)
+
+[node name="Spikes" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 259
+script = ExtResource("1_nj2my")
+
+[node name="model" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="model"]
+transform = Transform3D(1, 0, 0, 0, -0.20509398, -0.97874224, 0, 0.97874224, -0.20509398, 0.35340464, -0.2462681, -0.21633843)
+mesh = SubResource("CylinderMesh_nj2my")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="model"]
+transform = Transform3D(1, 0, 0, 0, -0.16063917, -0.9870132, 0, 0.9870132, -0.16063917, -0.37637973, 0.18516648, -0.13476315)
+mesh = SubResource("CylinderMesh_nj2my")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="model"]
+transform = Transform3D(1, 0, 0, 0, 0.037341326, -0.9993027, 0, 0.9993027, 0.037341326, 0.052244544, 0.18516648, -0.13476315)
+mesh = SubResource("CylinderMesh_nj2my")
+
+[node name="effect" type="Node3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.06204146, -0.9980736, 0, 0.9980736, -0.06204146, -0.007242799, -0.018474787, -0.24140882)
+shape = SubResource("BoxShape3D_cx254")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 259
+script = ExtResource("2_eo856")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, -0.02507773, -0.9996855, 0, 0.9996855, -0.02507773, -0.014004409, -0.04953207, 0.4746848)
+shape = SubResource("BoxShape3D_btgyx")
+
+[node name="PositionHelper_begin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7741938, 0.6329486, 0, -0.6329486, 0.7741938, 0, -0.5410523, 0.70043683)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PositionHelper_begin"]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855696e-08, -0.50000006, 0, 0.50000006, -2.1855696e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_nj2my")
+skeleton = NodePath("../../model")
+
+[node name="PositionHelper_end" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7741938, 0.6329486, 0, -0.6329486, 0.7741938, 0, 0.0777449, 1.5261087)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="PositionHelper_end"]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855696e-08, -0.50000006, 0, 0.50000006, -2.1855696e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_nj2my")
+skeleton = NodePath("../../model")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_attack_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_attack_body_entered"]

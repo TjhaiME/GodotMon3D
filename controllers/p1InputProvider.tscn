@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4tfcdj8e43p7"]
+
+[ext_resource type="Script" uid="uid://bnr6gk1cgdtsd" path="res://controllers/p1InputProvider.gd" id="1_dvmir"]
+
+[node name="P1InputProvider" type="Node"]
+script = ExtResource("1_dvmir")

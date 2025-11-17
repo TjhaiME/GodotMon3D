@@ -1,0 +1,28 @@
+# Godot 4+ specific ignores
+/android/
+
+
+# Godot-specific
+.export/
+mono_crash.*
+data_*/
+.godot/
+
+# Import & cache folders
+# KEEP *.import FILES (so model import settings remain stable)
+.import/        # Safe to ignore the folder; the *.import metadata files stay in project root
+
+# Godot temporary files
+*.tmp
+*.temp
+*.translation
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE-specific (optional)
+.vscode/
+.idea/
+*.code-workspace
+

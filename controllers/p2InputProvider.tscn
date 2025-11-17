@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgjo2pr6l7dsw"]
+
+[ext_resource type="Script" uid="uid://cikto4w5vkdn3" path="res://controllers/p2InputProvider.gd" id="1_vtkb8"]
+
+[node name="P2InputProvider" type="Node"]
+script = ExtResource("1_vtkb8")

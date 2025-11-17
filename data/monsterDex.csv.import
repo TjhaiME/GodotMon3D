@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bf62bsna3h3po"
+
+[deps]
+
+files=["res://data/monsterDex.element1.translation", "res://data/monsterDex.element2.translation", "res://data/monsterDex.maxHP.translation", "res://data/monsterDex.physAtk.translation", "res://data/monsterDex.physDef.translation", "res://data/monsterDex.spclAtk.translation", "res://data/monsterDex.spclDef.translation", "res://data/monsterDex.speed.translation", "res://data/monsterDex.evasion.translation", "res://data/monsterDex.climb.translation", "res://data/monsterDex.maxStamina.translation", "res://data/monsterDex.stamRegen.translation"]
+
+source_file="res://data/monsterDex.csv"
+dest_files=["res://data/monsterDex.element1.translation", "res://data/monsterDex.element2.translation", "res://data/monsterDex.maxHP.translation", "res://data/monsterDex.physAtk.translation", "res://data/monsterDex.physDef.translation", "res://data/monsterDex.spclAtk.translation", "res://data/monsterDex.spclDef.translation", "res://data/monsterDex.speed.translation", "res://data/monsterDex.evasion.translation", "res://data/monsterDex.climb.translation", "res://data/monsterDex.maxStamina.translation", "res://data/monsterDex.stamRegen.translation"]
+
+[params]
+
+compress=true
+delimiter=0

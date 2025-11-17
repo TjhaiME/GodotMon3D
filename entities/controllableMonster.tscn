@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn3w7f7jps2jj"]
+
+[ext_resource type="Script" uid="uid://cj7o2pthfhfdx" path="res://entities/controllableMonster.gd" id="1_h3qnb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wvtr8"]
+resource_local_to_scene = true
+radius = 0.3
+height = 1.5
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_h3qnb")
+move_speed = 3.0
+rotation_speed = 7.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_wvtr8")
+
+[node name="camVertHelper" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.0180645, 0)
+
+[node name="camHorizHelper" type="Node3D" parent="camVertHelper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.3280685)

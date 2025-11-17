@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://csfpjobatuylg"]
+
+[ext_resource type="Material" uid="uid://ms2niwdayxyo" path="res://effects/mats/wind.tres" id="1_42ln6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mlkd1"]
+lifetime_randomness = 0.02
+particle_flag_rotate_y = true
+emission_shape = 3
+emission_box_extents = Vector3(0.3, 0.3, 1)
+inherit_velocity_ratio = 0.8
+direction = Vector3(0, 0, 1)
+spread = 21.0
+initial_velocity_min = 0.01
+initial_velocity_max = 1.0
+orbit_velocity_min = -1.291
+orbit_velocity_max = 0.7090001
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 0.49999776
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0bowj"]
+material = ExtResource("1_42ln6")
+size = Vector2(1, 1.5)
+orientation = 2
+
+[node name="Wind" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.23131394, 0)
+visibility_range_fade_mode = 1
+amount = 16
+amount_ratio = 0.8052
+lifetime = 2.0
+draw_order = 2
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_mlkd1")
+draw_pass_1 = SubResource("PlaneMesh_0bowj")

@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://yqd5dppmsw26"]
+
+[ext_resource type="Script" uid="uid://hl0nck1bfi5n" path="res://controllers/ControllerManager.gd" id="1_ppies"]
+[ext_resource type="Script" uid="uid://tqgjtvf05plr" path="res://data/moves.gd" id="2_dk273"]
+[ext_resource type="Script" uid="uid://dbfi48d6f54c0" path="res://scripts/free_cam.gd" id="4_7d57j"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dkj4v"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_w16af"]
+sky_material = SubResource("ProceduralSkyMaterial_dkj4v")
+
+[sub_resource type="Environment" id="Environment_jovt7"]
+background_mode = 2
+sky = SubResource("Sky_w16af")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dtmhy"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jovt7"]
+resource_local_to_scene = true
+transparency = 1
+blend_mode = 1
+albedo_texture = SubResource("ViewportTexture_dtmhy")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mwokl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_jovt7")
+size = Vector2(1.25, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m8eh3"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ppies"]
+size = Vector3(20, 1, 20)
+
+[node name="MasterNode" type="Node3D"]
+script = ExtResource("1_ppies")
+
+[node name="AttacksData" type="Node" parent="."]
+script = ExtResource("2_dk273")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jovt7")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Attacks" type="Node3D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1200, 650)
+
+[node name="FreeCam" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.3290809, 0.9443018, 0, -0.9443018, 0.3290809, 1.4454956, 11.3843, 7.8218)
+script = ExtResource("4_7d57j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FreeCam"]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.9999999, 0, 0.9999999, -4.3711385e-08, 0, -0.1981368, -0.4482093)
+mesh = SubResource("PlaneMesh_mwokl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_m8eh3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_ppies")

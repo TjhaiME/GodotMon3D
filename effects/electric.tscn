@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvqkbhpcdmnsq"]
+
+[ext_resource type="Material" uid="uid://cuisjitj7lub1" path="res://effects/mats/electric.tres" id="1_tdniv"]
+
+[sub_resource type="Gradient" id="Gradient_68e0q"]
+colors = PackedColorArray(1, 1, 0, 1, 0.5686275, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wjnbt"]
+gradient = SubResource("Gradient_68e0q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2yks8"]
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+emission_shape = 2
+emission_sphere_radius = 1.0
+inherit_velocity_ratio = 1.0
+spread = 180.0
+initial_velocity_min = 0.01
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -0.10000224
+linear_accel_max = 0.09999776
+scale_min = 0.5
+scale_max = 1.5
+color = Color(1, 1, 0, 1)
+color_ramp = SubResource("GradientTexture1D_wjnbt")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3n3g1"]
+material = ExtResource("1_tdniv")
+size = Vector2(0.75, 1)
+orientation = 2
+
+[node name="Electric" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.23131394, 0)
+visibility_range_fade_mode = 1
+amount = 20
+amount_ratio = 0.8052
+lifetime = 0.85
+explosiveness = 0.72
+randomness = 0.74
+draw_order = 2
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_2yks8")
+draw_pass_1 = SubResource("PlaneMesh_3n3g1")

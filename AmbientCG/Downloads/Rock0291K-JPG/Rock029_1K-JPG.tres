@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://ct3gnporwnagh"]
+
+[ext_resource type="Texture2D" uid="uid://byatwl4aacebv" path="res://AmbientCG/Downloads/Rock0291K-JPG/Rock029_1K-JPG_AmbientOcclusion.jpg" id="AmbientOcclusion"]
+[ext_resource type="Texture2D" uid="uid://cprjre0p40ile" path="res://AmbientCG/Downloads/Rock0291K-JPG/Rock029_1K-JPG_Color.jpg" id="Color"]
+[ext_resource type="Texture2D" uid="uid://bxh20sh3yhgj3" path="res://AmbientCG/Downloads/Rock0291K-JPG/Rock029_1K-JPG_Displacement.jpg" id="Displacement"]
+[ext_resource type="Texture2D" uid="uid://l6fyhuismt7u" path="res://AmbientCG/Downloads/Rock0291K-JPG/Rock029_1K-JPG_NormalGL.jpg" id="NormalGL"]
+[ext_resource type="Texture2D" uid="uid://crukai35ephea" path="res://AmbientCG/Downloads/Rock0291K-JPG/Rock029_1K-JPG_Roughness.jpg" id="Roughness"]
+
+[resource]
+transparency = 1
+blend_mode = 1
+albedo_texture = ExtResource("Color")
+roughness_texture = ExtResource("Roughness")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("NormalGL")
+ao_enabled = true
+ao_texture = ExtResource("AmbientOcclusion")
+ao_texture_channel = 4
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("Displacement")

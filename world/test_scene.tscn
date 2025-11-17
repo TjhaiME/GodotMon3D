@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3 uid="uid://x6dd2fy5frmi"]
+
+[ext_resource type="PackedScene" uid="uid://cn3w7f7jps2jj" path="res://entities/controllableMonster.tscn" id="1_0tkqh"]
+[ext_resource type="Script" uid="uid://5ki3dleggmjg" path="res://world/test_scene.gd" id="1_ycvsm"]
+[ext_resource type="Script" uid="uid://dbfi48d6f54c0" path="res://scripts/free_cam.gd" id="3_yl3ou"]
+[ext_resource type="Script" uid="uid://tqgjtvf05plr" path="res://data/moves.gd" id="4_bwqr6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ycvsm"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yl3ou"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bwqr6"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jovt7"]
+resource_local_to_scene = true
+transparency = 1
+blend_mode = 1
+albedo_texture = SubResource("ViewportTexture_bwqr6")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2q0fw"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_jovt7")
+size = Vector2(1.25, 0.3)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2q0fw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_w16af"]
+sky_material = SubResource("ProceduralSkyMaterial_2q0fw")
+
+[sub_resource type="Environment" id="Environment_ve1mj"]
+background_mode = 2
+sky = SubResource("Sky_w16af")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestScene" type="Node3D"]
+script = ExtResource("1_ycvsm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_ycvsm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_yl3ou")
+
+[node name="Player" parent="." instance=ExtResource("1_0tkqh")]
+
+[node name="Player2" parent="." instance=ExtResource("1_0tkqh")]
+
+[node name="FreeCam" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.3290809, 0.9443018, 0, -0.9443018, 0.3290809, 1.4454956, 11.3843, 7.8218)
+script = ExtResource("3_yl3ou")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FreeCam"]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.9999999, 0, 0.9999999, -4.3711385e-08, 0, -0.1981368, -0.4482093)
+mesh = SubResource("PlaneMesh_2q0fw")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1200, 650)
+
+[node name="AttacksData" type="Node" parent="."]
+script = ExtResource("4_bwqr6")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ve1mj")
+
+[node name="Attacks" type="Node3D" parent="."]

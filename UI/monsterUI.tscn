@@ -1,0 +1,308 @@
+[gd_scene load_steps=2 format=3 uid="uid://biv1w142pv0ix"]
+
+[ext_resource type="Texture2D" uid="uid://bft4genc8gj0u" path="res://assets/UI/X.png" id="1_mdxk0"]
+
+[node name="UIControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxUI" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Moves" type="Control" parent="HBoxUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="HBoxUI/Moves"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="TL" type="Control" parent="HBoxUI/Moves/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="lockVisual" type="TextureRect" parent="HBoxUI/Moves/GridContainer/TL"]
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+texture = ExtResource("1_mdxk0")
+
+[node name="Y" type="Control" parent="HBoxUI/Moves/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="HBoxUI/Moves/GridContainer/Y"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MP" type="Label" parent="HBoxUI/Moves/GridContainer/Y"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.23, 0, 0, 1)
+theme_override_font_sizes/font_size = 74
+text = "100%"
+
+[node name="TR" type="Control" parent="HBoxUI/Moves/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="X" type="Control" parent="HBoxUI/Moves/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="HBoxUI/Moves/GridContainer/X"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MP" type="Label" parent="HBoxUI/Moves/GridContainer/X"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.23, 0, 0, 1)
+theme_override_font_sizes/font_size = 74
+text = "100%"
+
+[node name="Mid" type="Control" parent="HBoxUI/Moves/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="B" type="Control" parent="HBoxUI/Moves/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="HBoxUI/Moves/GridContainer/B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MP" type="Label" parent="HBoxUI/Moves/GridContainer/B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.23, 0, 0, 1)
+theme_override_font_sizes/font_size = 74
+text = "100%"
+
+[node name="BL" type="Control" parent="HBoxUI/Moves/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="A" type="Control" parent="HBoxUI/Moves/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="HBoxUI/Moves/GridContainer/A"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MP" type="Label" parent="HBoxUI/Moves/GridContainer/A"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.23, 0, 0, 1)
+theme_override_font_sizes/font_size = 74
+text = "100%"
+
+[node name="BR" type="Control" parent="HBoxUI/Moves/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Other" type="Control" parent="HBoxUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="vBoxOther" type="VBoxContainer" parent="HBoxUI/Other"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stats" type="Control" parent="HBoxUI/Other/vBoxOther"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxBars" type="VBoxContainer" parent="HBoxUI/Other/vBoxOther/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="myHP" type="Control" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="hpUnder" type="ColorRect" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20175228, 8.789126e-05, 4.822701e-05, 1)
+
+[node name="hpAbove" type="ColorRect" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.96, 0, 0.015999755, 1)
+
+[node name="Label" type="Label" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars/myHP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "891 HP"
+
+[node name="UpperEmpty" type="Control" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="myStamina" type="Control" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="staminaUnder" type="ColorRect" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars/myStamina"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.22745098, 0, 1)
+
+[node name="staminaAbove" type="ColorRect" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars/myStamina"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 1, 0, 1)
+
+[node name="Label" type="Label" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars/myStamina"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "69% stamina"
+
+[node name="MidEmpty" type="Control" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="enemiesHP" type="Control" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="enemy_hpUnder" type="ColorRect" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars/enemiesHP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20175228, 8.789126e-05, 4.822701e-05, 1)
+
+[node name="enemy_hpAbove" type="ColorRect" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars/enemiesHP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.96, 0, 0.015999755, 1)
+
+[node name="Label" type="Label" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars/enemiesHP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "254 HP"
+horizontal_alignment = 2
+
+[node name="LowerEmpty" type="Control" parent="HBoxUI/Other/vBoxOther/Stats/VBoxBars"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Info" type="Control" parent="HBoxUI/Other/vBoxOther"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxUI/Other/vBoxOther/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

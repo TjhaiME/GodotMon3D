@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4o8unrvnn07e"]
+
+[ext_resource type="Script" uid="uid://cpwelqyaf3jbu" path="res://attacks/base/new_slam.gd" id="1_p54ul"]
+[ext_resource type="PackedScene" uid="uid://cm5uraw3egwtg" path="res://assets/monsters/quaternius/glTF/Birb.gltf" id="2_yvfjx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sq60g"]
+size = Vector3(1.6015015, 1.511322, 0.79711914)
+
+[node name="NewSlam" type="Area3D"]
+collision_layer = 2
+script = ExtResource("1_p54ul")
+
+[node name="Birb2" parent="." instance=ExtResource("2_yvfjx")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007904053, 0.7883148, 0.10803223)
+shape = SubResource("BoxShape3D_sq60g")
+
+[connection signal="body_entered" from="." to="." method="_on_attack_body_entered"]

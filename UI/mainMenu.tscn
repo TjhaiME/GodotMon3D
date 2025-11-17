@@ -1,0 +1,107 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgexxgnih4q51"]
+
+[ext_resource type="Script" uid="uid://b5y7ms4n275ns" path="res://UI/main_menu.gd" id="1_88dob"]
+[ext_resource type="Texture2D" uid="uid://jirdhya7ir1l" path="res://icon.svg" id="2_ne5gk"]
+
+[sub_resource type="SystemFont" id="SystemFont_5iw7r"]
+font_names = PackedStringArray("Fantasy")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_88dob")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3647059, 1, 0.8, 1)
+
+[node name="VBoxTitle" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Control" parent="VBoxTitle"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxTitle/Title"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 22.0
+offset_right = 1004.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.75686276, 1, 0.019607844, 0.8980392)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_5iw7r")
+theme_override_font_sizes/font_size = 102
+text = "GodotMon 3D"
+horizontal_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="VBoxTitle"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxTitle/Options"]
+layout_mode = 2
+
+[node name="QuickBattle" type="Button" parent="VBoxTitle/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "quick battle"
+
+[node name="RogueMode" type="Button" parent="VBoxTitle/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "rogue mode"
+
+[node name="SplitBattle" type="Button" parent="VBoxTitle/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "Splitscreen Battle"
+
+[node name="BrawlBattle" type="Button" parent="VBoxTitle/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "Brawl Battle"
+
+[node name="MonsterSelect" type="VBoxContainer" parent="VBoxTitle"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="VBoxTitle/MonsterSelect"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Choose Your Carrot Top"
+horizontal_alignment = 1
+
+[node name="ChangeP1Monster" type="MenuButton" parent="VBoxTitle/MonsterSelect"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Change P1 Monster
+current:"
+icon = ExtResource("2_ne5gk")
+expand_icon = true
+
+[node name="ChangeP2Monster" type="MenuButton" parent="VBoxTitle/MonsterSelect"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Change P2 Monster
+current:"
+icon = ExtResource("2_ne5gk")
+expand_icon = true

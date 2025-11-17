@@ -1,0 +1,23 @@
+
+where to get textures
+https://godotassetlibrary.com/asset/uRmeig/ambientcg-material-downloader-(godot-4.4+)
+godot asset to import from ambientcg
+
+Cool random models:
+	https://opengameart.org/content/wlilys-characters
+
+where to get models:
+	https://github.com/madjin/awesome-cc0
+
+sprite datapacks for vfx
+https://opengameart.org/content/free-vfx-asset-pack
+
+https://github.com/RPicster/Godot-particle-and-vfx-textures
+
+fx pack:
+	https://opengameart.org/content/free-mega-toon-fx-lite
+	https://opengameart.org/content/unity-hit-vfx-volume-2
+
+fist:
+	cc-by
+	https://opengameart.org/content/fist-club

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvae8cotb638n"]
+
+[ext_resource type="Script" uid="uid://cw2lbbmm4rle1" path="res://effects/test.gd" id="1_xdktb"]
+[ext_resource type="Material" uid="uid://d65jxxmqiia1" path="res://effects/mats/fire.tres" id="2_jx2c4"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gm6we"]
+lifetime_randomness = 0.02
+inherit_velocity_ratio = 0.4
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.01
+initial_velocity_max = 0.5
+orbit_velocity_min = -1.291
+orbit_velocity_max = 0.7090001
+radial_velocity_min = -0.10002235
+radial_velocity_max = 0.09997764
+gravity = Vector3(0, 0.2, 0)
+radial_accel_min = -1.0000023
+radial_accel_max = 0.99999774
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i4fjq"]
+material = ExtResource("2_jx2c4")
+size = Vector2(1, 1.5)
+orientation = 2
+
+[node name="Fire" type="Node3D"]
+script = ExtResource("1_xdktb")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.23131394, 0)
+visibility_range_fade_mode = 1
+amount = 16
+amount_ratio = 0.8052
+explosiveness = 0.26
+draw_order = 2
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_gm6we")
+draw_pass_1 = SubResource("PlaneMesh_i4fjq")

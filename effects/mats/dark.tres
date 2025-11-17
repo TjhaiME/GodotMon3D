@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bnnqwl0wyxyk8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i5mq6"]
+load_path = "res://.godot/imported/spark_02.png-5e50dbc434260af2153ca5a43e08726b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4w4b3"]
+load_path = "res://.godot/imported/spark_04.png-08436cfd8d8b364232b4851b8c322296.s3tc.ctex"
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.8, 0, 0, 1)
+albedo_texture = SubResource("CompressedTexture2D_i5mq6")
+emission_enabled = true
+emission = Color(0.537615, 0.00022534818, 0.54357827, 1)
+emission_energy_multiplier = 16.0
+emission_operator = 1
+emission_texture = SubResource("CompressedTexture2D_4w4b3")

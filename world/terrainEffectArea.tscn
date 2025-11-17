@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://36on0pnmp0uo"]
+
+[ext_resource type="Script" uid="uid://ca2l77h0mlrn0" path="res://scripts/terrainEffectArea.gd" id="1_ekroj"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s6q20"]
+
+[node name="TerrainEffectArea" type="Area3D"]
+script = ExtResource("1_ekroj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_s6q20")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
