@@ -240,7 +240,7 @@ func _start_battle(preReadyVars):
 	# Switch to the main game scene
 	
 	
-	central.change_scene("res://master_node_Flat.tscn", preReadyVars)
+	central.change_scene("res://master_node.tscn", preReadyVars)
 
 func populate_monster_list():
 	var p1Menu = $VBoxTitle/MonsterSelect/ChangeP1Monster.get_popup()

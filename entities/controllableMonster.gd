@@ -1,6 +1,16 @@
 #extends "res://scripts/controllable.gd"
 extends CharacterBody3D
 
+#if we dodge onto a wall or we land on a wall we should enter climbing state DONE
+#we need a jump button as well that we can direct with input DONE
+#okay we have a jump now we need to make it move DONE
+#we meed the jump to be bigger and have more oomph in it when given directional input
+#could take advantage of jump_pressed and released signals, so we can charge up jumps
+#or we could have guard+jump be a special crouch jump thingo
+#we still have two more buttons, ones for item stuffs.
+
+#while it is noe easier to enter climb state, it is much harder to get out of
+
 #okay we can climb now (needs tweaking)
 #would be better if we jump into the climb
 #now we need to add dodge by using code similar to slam DONE
@@ -241,7 +251,6 @@ func on_set_control():
 	cooldownMod = {}
 
 
-
 func handle_input(delta: float, input_data: Dictionary) -> void:
 	standingStill = false
 	if not is_controlled:
@@ -306,7 +315,10 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 
 		var desired_move = (right_dir * input_vec.x + up_along_surface * input_vec.y).normalized()
 		move_dir = desired_move
-
+	elif movement_state == movement_states["falling"]:
+		var fallSpeedMod = 0.5
+		move_dir = fallSpeedMod*(-move_input.y*global_transform.basis.z -move_input.x*global_transform.basis.x).normalized()
+		
 
 ##TEST COMMENT OUT setting velocity here
 		## Apply to velocity
@@ -321,6 +333,8 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 		var resistance = 1.0  # Tune this value to adjust how quickly velocity slows
 		velocity.x = lerp(velocity.x, 0.0, resistance * delta)
 		velocity.z = lerp(velocity.z, 0.0, resistance * delta)
+	elif movement_state == movement_states["falling"]:
+		velocity += move_dir*delta
 	elif move_dir.length() > 0.0001:
 		var move_speed_mod = 1.0
 		#aslo make this dependent on stamina
@@ -361,8 +375,9 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 			
 
 	#move_and_slide()
-
-
+	if input_data["jump_pressed"]:
+		if movement_state == movement_states["grounded"]:
+			start_jump(input_data)
 
 	if input_data["dodge_pressed"]:
 		
@@ -432,20 +447,19 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 	check_activate_dodge(input_data)
 	
 	
+	var check_to_climb = false
+	
 	###for climbing:
 	if dodge_pressed and movement_state == movement_states["grounded"]:
-		print("looking for wall")
-		var wall_check_origin = global_transform.origin + Vector3(0, 0.04, 0) # just above floor height
-		var wall_check_dir = global_transform.basis.z
-		var wall_check_distance = 0.8#1.2
-		var result = raycast(wall_check_origin, wall_check_dir, wall_check_distance)
-
-		if result:
-			print("raycast hit wall")
-			var normal: Vector3 = result.normal
-			var angle = rad_to_deg(acos(normal.dot(Vector3.UP)))
-			if angle > stats["climb"]: # too steep = climbable
-				start_climb(normal)
+		#this is the old method of checking for climb
+		check_to_climb = true
+	
+	#we want to do a new method, if we land and we are pushing up on the stick
+	#if we dodge forward and hit a wall
+	
+	if check_to_climb:
+		#we should move this to dodge process 
+		check_for_start_climb()
 
 	var look_input: Vector2 = input_data["look"]
 	if look_input.length() > 0.0001 or move_input.length() > 0.0001:
@@ -792,8 +806,21 @@ func check_activate_dodge(input_data):
 			else:
 				print("ERROR, not on ground, couldnt dodge, movement_state = ", movement_state)
 
+func start_jump(input_data):
+	##TODO
+	#we should use input data to give it some more direction
+	var jumpStrength = 1.0
+	var move_dir = jumpStrength*Vector3(0.0,1.0,0.0)
+	movement_state = movement_states["jumping"]
+	velocity += move_speed*move_dir
 
 func start_dodge(input_data):
+	#We DO NOT want this to jump anymore, it should always go forward if there is no input_data
+	
+	
+	
+	
+	
 	#changed so this only runs when acturally releasing the dodge button and being in a state where we can dodge
 	#busyAttacking = true
 	
@@ -817,9 +844,11 @@ func start_dodge(input_data):
 	#var move_dir = (transform.basis * Vector3(move_input.x, 0, move_input.y)).normalized()
 	var move_dir = Vector3(0.0,0.0,0.0)
 	if move_input.length() < 0.01:
-		var jumpStrength = 1.0
-		move_dir = jumpStrength*Vector3(0.0,1.0,0.0)
-		movement_state = movement_states["jumping"]
+		#var jumpStrength = 1.0
+		#move_dir = jumpStrength*Vector3(0.0,1.0,0.0)
+		#movement_state = movement_states["jumping"]
+		
+		move_dir = -1.0*global_transform.basis.z
 	else:
 		move_dir = (-move_input.y*global_transform.basis.z -move_input.x*global_transform.basis.x).normalized()
 
@@ -853,13 +882,21 @@ func end_dodge_release():
 	pass
 func physical_dodge_process(delta, input_data):
 	print("release proc")
+	#runs 16 times in a single dodge
 	atkLife += delta
 	var attackName = "Dodge"#busyAtkName
 	var atkData = masterNodeRef.get_node("AttacksData").moveData[attackName]
 	#how long can we hold this part of the attack before it ends and we resume control
 	#end_physical_attack_release()
 	#move_and_slide()
-	if atkLife > atkData["lifetime"]:
+	var did_climb_start = false
+	var move_input = input_data["move"]
+	var upDirPressed = -1.0*move_input.y
+	if upDirPressed > 0.5:
+		#when dodging forward we can enter a climb state
+		did_climb_start = check_for_start_climb()
+	
+	if atkLife > atkData["lifetime"] or did_climb_start:
 		end_dodge_release()
 	#var attackName = busyAtkName
 	pass
@@ -939,6 +976,24 @@ func end_climb(fall: bool):
 		movement_state = movement_states["grounded"]
 	climb_normal = Vector3.ZERO
 
+func check_for_start_climb():
+	print("looking for wall")
+	var wall_check_origin = global_transform.origin + Vector3(0, 0.04, 0) # just above floor height
+	var wall_check_dir = global_transform.basis.z
+	var wall_check_distance = 0.8#1.2
+	var result = raycast(wall_check_origin, wall_check_dir, wall_check_distance)
+
+	if result:
+		print("raycast hit wall")
+		var normal: Vector3 = result.normal
+		var angle = rad_to_deg(acos(normal.dot(Vector3.UP)))
+		if angle > 0.75*stats["climb"]: # too steep = climbable not walkable
+			#maybe this is still too high though
+			#it should be higher than the minimum
+			start_climb(normal)
+			return true
+	
+	return false
 
 
 ##############
