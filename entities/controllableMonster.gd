@@ -889,7 +889,7 @@ func end_dodge_release():
 	_set_up_default_collision()
 	pass
 func physical_dodge_process(delta, input_data):
-	#print("release proc")
+	print("release proc")
 	#runs 16 times in a single dodge
 	atkLife += delta
 	var attackName = "Dodge"#busyAtkName
@@ -901,6 +901,7 @@ func physical_dodge_process(delta, input_data):
 	var move_input = input_data["move"]
 	var upDirPressed = -1.0*move_input.y
 	if upDirPressed > 0.5:
+		print("up dir pressed")
 		#when dodging forward we can enter a climb state
 		did_climb_start = check_for_start_climb()
 	
@@ -986,7 +987,7 @@ func end_climb(fall: bool):
 
 func check_for_start_climb():
 	print("looking for wall")
-	var wall_check_origin = global_transform.origin + Vector3(0, 0.04, 0) # just above floor height
+	var wall_check_origin = global_transform.origin + Vector3(0, 0.5, 0) # just above floor height
 	var wall_check_dir = global_transform.basis.z
 	var wall_check_distance = 0.8#1.2
 	var result = raycast(wall_check_origin, wall_check_dir, wall_check_distance)
@@ -996,6 +997,7 @@ func check_for_start_climb():
 		var normal: Vector3 = result.normal
 		var angle = rad_to_deg(acos(normal.dot(Vector3.UP)))
 		if angle > 0.75*stats["climb"]: # too steep = climbable not walkable
+			print("starting climb")
 			#maybe this is still too high though
 			#it should be higher than the minimum
 			start_climb(normal)
@@ -1117,7 +1119,7 @@ func _process(delta: float) -> void:
 		##Raycast to check the wall normal
 		var wall_check_origin = global_transform.origin + Vector3(0, 1.0, 0)
 		var wall_check_dir = -climb_normal
-		var result = raycast(wall_check_origin, wall_check_dir, 0.5)#was 1.5
+		var result = raycast(wall_check_origin, wall_check_dir, 1.0)#was 1.5
 
 		if not result:
 			print("raycast 1 didnt hit anything")
@@ -1155,7 +1157,7 @@ func _process(delta: float) -> void:
 			velocity.y -= GRAVITY * delta
 		var horizVel = Vector2(velocity.x,velocity.z)
 		print("knocked state, horizVel.length() = ", horizVel.length())
-		if horizVel.length() < 0.2:#0.1 seems too low
+		if horizVel.length() < 0.23:#0.1 seems too low
 			movement_state = movement_states["falling"]
 	else: #grounded or falling
 		if not is_on_floor():

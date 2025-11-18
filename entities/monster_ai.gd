@@ -30,6 +30,7 @@ var pressedAttackButton = ""#if "" then it is false, else buttonChar
 
 
 var states = {
+	"peaceful" : -1,
 	"idle" : 0,#stand still do nothing for now
 	#"halfAlert"
 	"alert" : 1,#theres an enemy close, looking for it
@@ -40,6 +41,11 @@ var state = 0
 func switch_states(newStateStr):
 	count = 0
 	failTimer = 0.0
+	var oldState = state
+	if oldState == states["peaceful"]:
+		toggle_peaceful_state(false)
+	elif newStateStr == "peaceful":
+		toggle_peaceful_state(true)
 	state = states[newStateStr]
 
 func set_up_empty_input_data(input_data):
@@ -75,6 +81,7 @@ func set_up_empty_input_data(input_data):
 func _ready() -> void:
 	monsterNode = get_parent()
 	monsterNode.is_controlled = true
+	switch_states("peaceful")
 
 
 var chargeAttackCounter = 0.0
@@ -108,9 +115,10 @@ func _process(delta: float) -> void:
 		handle_idle_state(delta, input_data)
 	elif state == states["alert"]:
 		input_data = handle_alert_state(delta, input_data)
-	else:
+	elif state == states["hostile"]:
 		input_data = handle_hostile_state(delta, input_data)
-	
+	else:
+		input_data = handle_peaceful_state(delta, input_data)
 	
 	monsterNode.handle_input(delta, input_data)
 
@@ -134,6 +142,17 @@ func _turn_to_enemy():
 		newRot.y = monsterNode.rotation.y
 		monsterNode.rotation = newRot
 		#(target: Vector3, up: Vector3 = Vector3(0, 1, 0), use_model_front: bool = false)
+
+func toggle_peaceful_state(toggleOn):
+	$AlertArea/CollisionShape3D.disabled = toggleOn
+	#if toggleOn:
+		#switch_states("peaceful")
+	#else:
+		#switch_states("idle")
+
+func handle_peaceful_state(delta, input_data):
+	#just so I can have monster with ai that if you attack then they become hostile
+	return input_data
 
 func handle_idle_state(delta, input_data):
 	if enemiesInAlertRange.size() <= 0:

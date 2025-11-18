@@ -184,7 +184,8 @@ func _ready():
 	
 	
 	
-	p2monster.queue_free()##TESTING
+	#p2monster.queue_free()##TESTING
+	p2monster.cpuAiNode.switch_states("peaceful")#so it doesn't attack you unless you attack it
 
 
 
