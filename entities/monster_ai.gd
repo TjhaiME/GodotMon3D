@@ -76,6 +76,10 @@ func _ready() -> void:
 	monsterNode = get_parent()
 	monsterNode.is_controlled = true
 
+
+var chargeAttackCounter = 0.0
+var chargeTimerThreshold = 0.5#seconds (gets set to random when button pressed)
+
 func _process(delta: float) -> void:
 	
 	
@@ -90,9 +94,14 @@ func _process(delta: float) -> void:
 	
 	
 	if pressedAttackButton != "":
-		var buttonChar = pressedAttackButton
-		input_data[str("attack_",buttonChar,"_released")] = true
-		pressedAttackButton = ""
+		chargeAttackCounter += delta
+		#beam somehow doesnt work with an npc, I assume because charging only lasts a frame.
+		#okay this didnt fix it
+		if chargeAttackCounter > chargeTimerThreshold:
+			chargeAttackCounter = 0.0
+			var buttonChar = pressedAttackButton
+			input_data[str("attack_",buttonChar,"_released")] = true
+			pressedAttackButton = ""
 	
 	
 	if state == states["idle"]:
@@ -110,8 +119,8 @@ func _turn_to_enemy():
 	
 	testCount += 1
 	if testCount > 10:
-		print("monsterNode = ", monsterNode, ", pos ", monsterNode.global_transform.origin)
-		print("targetEnemy = ", targetEnemy, ", pos ", targetEnemy.global_transform.origin)
+		pass#print("monsterNode = ", monsterNode, ", pos ", monsterNode.global_transform.origin)
+		pass#print("targetEnemy = ", targetEnemy, ", pos ", targetEnemy.global_transform.origin)
 		#THIS IS STRANGE THERE IS A POINT WHERE THEY ARE THE SAME NODE.... the enemy is targetting itself
 		#also weird as we got an error saying get() expects only 1 variable but we have called in with 2 variables (one for defau;lt value) before and it has worked
 		#needs more testing
@@ -240,16 +249,17 @@ func handle_hostile_state(delta, input_data):
 			input_data[str("attack_",buttonChar,"_pressed")] = true
 			input_data[str("attack_",buttonChar,"_held")] = true
 			pressedAttackButton = buttonChar
+			chargeTimerThreshold = 0.3 + 0.7*randf()# + 1.0
 	#elif it is on the floor (1 << 8) then do something
 	#elif it is an attack then check the length to the attack (1 << 1) and gaurd/dodge (input_data["dodge_pressed"] = true + input_data["move"] = Vector2(+-1.0,0.0))
 	elif enemyRayResult.collider.collision_layer & (1 << 8):
 		# Hit the floor
-		print("Floor blocking LOS")
+		pass#print("Floor blocking LOS")
 		# do something
 
 	elif enemyRayResult.collider.collision_layer & (1 << 1):
 		# Hit an attack
-		print("Attack detected")
+		pass#print("Attack detected")
 		
 		##BADLY DONE AS ITS NOT CHECKING THE DIRECTION OF THE ATTACK
 		
@@ -273,8 +283,8 @@ func check_if_on_same_team(nodeRef):
 		return true#if it doesnt have a teamID we DONT want to attack
 	#if nodeRef.has_variable("teamID"):
 	if monsterNode.teamID == other_teamID:
-		print("enemyNode = ", nodeRef)
-		print("on same team, aiTeamID = ", monsterNode.teamID)
+		pass#print("enemyNode = ", nodeRef)
+		pass#print("on same team, aiTeamID = ", monsterNode.teamID)
 		return true
 	return false#we only want to attack if they have a teamID and are on a seperate team
 

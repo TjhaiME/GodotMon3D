@@ -272,6 +272,8 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 		return
 
 	var move_input: Vector2 = input_data["move"]
+	if move_input.length() > 0.1:
+		print("move_input = ", move_input)
 	#var move_dir = (transform.basis * Vector3(move_input.x, 0, move_input.y)).normalized()
 	var move_dir = Vector3(0.0,0.0,0.0)
 	##Move dir changes based on our movement state
@@ -304,7 +306,10 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 		#pass#test
 		#commenting out the below line makes all movement stop
 		#when moving backwards we jitter a lot
+		
 		move_dir = (-move_input.y*global_transform.basis.z -move_input.x*global_transform.basis.x).normalized()
+		if move_dir.length() > 0.1:
+			print("grounded move_dir = ", move_dir)
 	elif movement_state == movement_states["climbing"]:
 		print("climbing wall movement")
 		var input_vec = Vector3(-move_input.x, -move_input.y, 0)
@@ -357,8 +362,11 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 		if movement_state == movement_states["climbing"]:
 			pass
 		else:
-			var target_rot = Basis.looking_at(-move_dir, Vector3.UP)
-			transform.basis = transform.basis.slerp(target_rot, delta * rotation_speed)
+			if move_dir.dot(global_transform.basis.z) >= 0.5*move_dir.length():
+				#we are moving mostly forward
+				var target_rot = Basis.looking_at(-move_dir, Vector3.UP)
+				transform.basis = transform.basis.slerp(target_rot, delta * rotation_speed)
+				transform.basis = transform.basis.orthonormalized()
 			
 			if isRunning():
 				switch_animation("Run")
@@ -881,7 +889,7 @@ func end_dodge_release():
 	_set_up_default_collision()
 	pass
 func physical_dodge_process(delta, input_data):
-	print("release proc")
+	#print("release proc")
 	#runs 16 times in a single dodge
 	atkLife += delta
 	var attackName = "Dodge"#busyAtkName
@@ -1109,7 +1117,7 @@ func _process(delta: float) -> void:
 		##Raycast to check the wall normal
 		var wall_check_origin = global_transform.origin + Vector3(0, 1.0, 0)
 		var wall_check_dir = -climb_normal
-		var result = raycast(wall_check_origin, wall_check_dir, 1.2)
+		var result = raycast(wall_check_origin, wall_check_dir, 0.5)#was 1.5
 
 		if not result:
 			print("raycast 1 didnt hit anything")
@@ -1146,13 +1154,14 @@ func _process(delta: float) -> void:
 		if not is_on_floor():
 			velocity.y -= GRAVITY * delta
 		var horizVel = Vector2(velocity.x,velocity.z)
-		if horizVel.length() < 0.1:
+		print("knocked state, horizVel.length() = ", horizVel.length())
+		if horizVel.length() < 0.2:#0.1 seems too low
 			movement_state = movement_states["falling"]
 	else: #grounded or falling
 		if not is_on_floor():
 			velocity.y -= GRAVITY * delta
 			movement_state = movement_states["falling"]
-			
+			print("movement state Falling")
 			
 		else:
 			velocity.y = 0  # reset vertical velocity when on floor

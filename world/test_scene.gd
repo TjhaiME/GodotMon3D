@@ -178,6 +178,13 @@ func _ready():
 	monsterNode.cpuAiNode = AINode
 	#print("player ", index, "is human? ", val)
 	
+	
+	
+	
+	
+	
+	
+	p2monster.queue_free()##TESTING
 
 
 
