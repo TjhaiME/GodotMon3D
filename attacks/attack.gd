@@ -623,8 +623,9 @@ func _hit_enemy(enemyRef):
 		#enemyRef.movement_state = enemyRef.movement_states["jumping"]
 	
 	#KO if health below zero
-	if enemyStats["HP"] <= 0:
-		enemyRef.enter_KO_state()
+	enemyRef.check_if_died()
+	#if enemyStats["HP"] <= 0:
+		#enemyRef.enter_KO_state()
 	
 	########################
 	## DRAINING HEALTH

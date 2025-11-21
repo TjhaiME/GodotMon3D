@@ -129,7 +129,10 @@ func get_input_data() -> Dictionary:
 		"dodge_pressed": false,
 		"dodge_held": false,
 		"dodge_released": false,
-		"jump_pressed": false
+		"jump_pressed": false,
+		"interact_pressed" : false,
+		"interact_held" : false,
+		"interact_released" : false
 	}
 
 	_think_timer -= Engine.get_physics_interpolation_fraction() # use frame time approx

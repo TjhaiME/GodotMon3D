@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2wtj20ce72y0"]
+
+[ext_resource type="Script" uid="uid://x62q03coadiw" path="res://UI/oldCode/interact_control.gd" id="1_ltts6"]
+
+[node name="interactControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ltts6")

@@ -108,6 +108,11 @@ func set_control(new_controller, player_index: int = 0):
 	if new_controller.has_method("on_set_control"):
 		new_controller.on_set_control()
 
+#so for something to be a controller it needs
+#var is_controlled = false
+#func on_set_control():
+#var playerID = 0
+
 
 #########################################
 #   PRocess and helper functions
@@ -122,7 +127,9 @@ func _physics_process(delta):
 		var provider = player_data["input_provider"]
 		if not controller or not provider:
 			continue
+		#print("provider = ", provider)
 		var input_data = provider.get_input_data()
+		#print("input_data = ", input_data)
 		controller.handle_input(delta, input_data)
 
 
@@ -183,11 +190,17 @@ func set_up_stats_from_base_stats(baseStats):
 			newDic[key] = fullStats[key].duplicate()
 		else:
 			newDic[key] = fullStats[key]
+		
+		
+		
+		newDic["base"] = {}
+		for baseStatName in ["maxHP","maxStamina","stamRegen","physAtk","physDef","spclAtk","spclDef","speed","evasion","climb"]:
+			newDic["base"][baseStatName] = baseStats[baseStatName]
+		#baseStats.duplicate(true)#seems redundant, but allows us to have the normal stats be modified during battle
 	return newDic
 	#"stamina
 	#"maxStamina
 	#"stamRegen
-
 
 
 
@@ -246,10 +259,24 @@ func _ready():
 			"camera": null,
 			"viewport": null,#the viewport for seeing the screen
 			"container": null,
+			
 			"uiViewport": null, #the viewport for seeing the GUI
-			"uiMesh": null#the mesh for displaying the GUI
+			"uiMesh": null,#the mesh for displaying the GUI
+			
+			#these parts need to be saved
+			"inventory" : {
+				#e.g. "gravelrock" : 20,
+			},
+			"inventory_size" : 10,#this can change for each player as we upgrade
+			"money" : 0,#use to buy items
+			#we might also need a box of monsters we have
+			#a box of items we store, not in our active inventory
+			
 		}
+		#we don't need to duplicate because we create it here
 		players.append(player_data)
+
+
 
 
 
@@ -607,4 +634,43 @@ func update_generalCooldown_lock_visual_SAFE(ifVisible: bool, playerID: int = 0)
 	if current != ifVisible:
 		subViewport.get_node("UIControl/HBoxUI/Moves/GridContainer/TL/lockVisual").visible = ifVisible
 	
+	refresh_player_ui(playerID)
+
+func update_status_ui(condition, timerString, playerID: int = 0):
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Status/Label").text = condition
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Status/Label").text = timerString
+	refresh_player_ui(playerID)
+
+func update_inventory_ui(invIndex, playerID: int = 0):
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	
+	var invKeys = players[playerID]["inventory"].keys()
+	if invKeys.size() <= 0:
+		subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/SelectedItem/Label").text = "No Items"
+		subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/RightItem/Label").text = ""
+		subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/LeftItem/Label").text = ""
+		return
+	if invIndex >= invKeys.size():
+		print("inventory index is out of bounds")
+		return
+	#CURRENT SELECTED
+	var itemName = invKeys[invIndex]
+	var amount = players[playerID]["inventory"][itemName]
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/SelectedItem/Label").text = itemName
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/SelectedItem/Amount").text = str(amount)
+	#LEFT
+	itemName = invKeys[(invIndex-1)%invKeys.size()]
+	amount = players[playerID]["inventory"][itemName]
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/LeftItem/Label").text = itemName
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/LeftItem/Amount").text = str(amount)
+	#RIGHT
+	itemName = invKeys[(invIndex+1)%invKeys.size()]
+	amount = players[playerID]["inventory"][itemName]
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/RightItem/Label").text = itemName
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/RightItem/Amount").text = str(amount)
 	refresh_player_ui(playerID)

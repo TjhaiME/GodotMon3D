@@ -1,3 +1,16 @@
+cool collections with lots of good spell effects
+https://opengameart.org/content/wc3-ish-mod
+
+potionssimple but cc-by:
+	https://opengameart.org/content/rpg-potions-16x16
+	weird fruits but cc by
+	https://opengameart.org/content/weird-fruits-16x16
+some cc0 options:
+	https://opengameart.org/content/potion-bottles-1
+
+
+ui box:
+	https://opengameart.org/content/fantasy-ui-box
 
 where to get textures
 https://godotassetlibrary.com/asset/uRmeig/ambientcg-material-downloader-(godot-4.4+)

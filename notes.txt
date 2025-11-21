@@ -1,3 +1,41 @@
+we have inventory and items now
+do status spawning effects as a function
+and do staus in ui
+we should make items that affect all the stats (still going)
+we need status effscts too, posion paralysis etc (added these as code in handle_input and as potions you can throw, havent tested)
+(ailment)
+we also need a way to affect base stats and return to normal later (added a base stats but no effects yet - add to attacks with chance of triggering - add to poison and healing items)
+all the battle calculations use the normal stats[statName]
+so maybe we have a baseStats that can be recorded and then things can be set back to normal when we heal, and when we level up we adjust the base stats
+we also need a way to use items that have a long effect, heal over time
+show which item we have selected DONE
+ (icons for each item) 
+show which status condition we have and for how long (added nodes to place it but not code)
+
+WE STILL NEED A MOVE CHANGING SCREEN
+we select a move then go to the screen and choose a move to replace or something
+#when we use a TM-like item we want to activate the same thing.
+#this is also useful as a shop/menu for switching back from previously known moves.
+(collect moves over time might make rogue more fun, as you still go out with nothing but your self)
+(as in when you dont have them active you can still relearn them)
+
+if trainers, monsters and attacks are all controllable oobjects using the same handle_input code then 
+ui objects that need to be interacted with are the same thing
+working on this now, there is a new button "interact"
+in test_scene there is a transparent pink cylinder, if you walk in and click interact (left ctrl)
+then it changes the ui to a differernt scene and it takes control of the controller so now the scene is accessible through the controller
+#good for interactable menus etc
+it uses interact_with_npc.tscn
+
+
+
+possible hidden bug
+node.get("variablename") does not always seem to work as intended
+at least if the var is ever null, then it cant be used to check if a var exists
+instead for things that should be null we use a method to retrieve it
+we do nodeRef.get("teamID") at some point, I wonder if it works as intended, probably does
+
+
 STRUCTURE OF PROJECT:
 	There is a singleton res://scripts/globalSingelton.gd
 	that is autoloaded before the project launches

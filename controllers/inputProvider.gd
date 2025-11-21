@@ -29,4 +29,7 @@ func get_input_data() -> Dictionary:
 		"jump_pressed": false,
 		"dodge_released": false,
 		"jump_released": false,
+		"interact_pressed" : false,
+		"interact_held" : false,
+		"interact_released" : false
 	}

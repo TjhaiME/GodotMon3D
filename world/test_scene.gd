@@ -38,6 +38,18 @@ var monsterData = {
 			"B" : "Breath",
 			"X" : "Charge Punch",
 			"Y" : "Slam"
+		},
+		"base" : { #allows us to modify stats midbattle temporarily (seems redundant I know)
+			"maxHP" : 150,
+			"maxStamina" : 100,
+			"stamRegen" : 75,
+			"physAtk" : 75,
+			"physDef" : 75,
+			"spclAtk" : 75,
+			"spclDef" : 75,
+			"speed" : 75, #increases evade distance too
+			"evasion" : 75,
+			"climb" : 45.0, #allows us to walk up steeper hills
 		}
 	},
 	1 : {
@@ -71,6 +83,18 @@ var monsterData = {
 			"B" : "Breath",
 			"X" : "Charge Punch",
 			"Y" : "Slam"
+		},
+		"base" : {
+			"maxHP" : 150,
+			"maxStamina" : 100,
+			"stamRegen" : 75,
+			"physAtk" : 75,
+			"physDef" : 75,
+			"spclAtk" : 75,
+			"spclDef" : 75,
+			"speed" : 75, #increases evade distance too
+			"evasion" : 75,
+			"climb" : 45.0, #allows us to walk up steeper hills
 		}
 	},
 }
@@ -134,8 +158,19 @@ func _ready():
 			"camera": null,
 			"viewport": null,#the viewport for seeing the screen
 			"container": null,
+			
 			"uiViewport": null, #the viewport for seeing the GUI
-			"uiMesh": null#the mesh for displaying the GUI
+			"uiMesh": null,#the mesh for displaying the GUI
+			
+			#these parts need to be saved
+			"inventory" : {
+				#e.g. "gravelrock" : 20,
+			},
+			"inventory_size" : 10,#this can change for each player as we upgrade
+			"money" : 100,#TODO set to zero, start with 100 for testing use to buy items
+			#we might also need a box of monsters we have
+			#a box of items we store, not in our active inventory
+			
 		}
 		players.append(player_data)
 
@@ -187,6 +222,10 @@ func _ready():
 	#p2monster.queue_free()##TESTING
 	p2monster.cpuAiNode.switch_states("peaceful")#so it doesn't attack you unless you attack it
 
+
+
+	$InteractArea.masterRefNode = self
+	$InteractArea2.masterRefNode = self
 
 
 
@@ -451,4 +490,43 @@ func update_generalCooldown_lock_visual_SAFE(ifVisible: bool, playerID: int = 0)
 	if current != ifVisible:
 		subViewport.get_node("UIControl/HBoxUI/Moves/GridContainer/TL/lockVisual").visible = ifVisible
 	
+	refresh_player_ui(playerID)
+
+func update_status_ui(condition, timerString, playerID: int = 0):
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Status/Label").text = condition
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Status/Timer").text = timerString
+	refresh_player_ui(playerID)
+
+func update_inventory_ui(invIndex, playerID: int = 0):
+	var subViewport = players[playerID]["uiViewport"]
+	if subViewport == null:
+		return
+	
+	var invKeys = players[playerID]["inventory"].keys()
+	if invKeys.size() <= 0:
+		subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/SelectedItem/Label").text = "No Items"
+		subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/RightItem/Label").text = ""
+		subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/LeftItem/Label").text = ""
+		return
+	#if invIndex >= invKeys.size() or invIndex < 0:
+		#print("inventory index is out of bounds")
+	invIndex = invIndex % invKeys.size()
+	#CURRENT SELECTED
+	var itemName = invKeys[invIndex]
+	var amount = players[playerID]["inventory"][itemName]
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/SelectedItem/Label").text = itemName
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/SelectedItem/Amount").text = str(amount)
+	#LEFT
+	itemName = invKeys[(invIndex-1)%invKeys.size()]
+	amount = players[playerID]["inventory"][itemName]
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/LeftItem/Label").text = itemName
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/LeftItem/Amount").text = str(amount)
+	#RIGHT
+	itemName = invKeys[(invIndex+1)%invKeys.size()]
+	amount = players[playerID]["inventory"][itemName]
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/RightItem/Label").text = itemName
+	subViewport.get_node("UIControl/HBoxUI/Other/vBoxOther/Info/Items/RightItem/Amount").text = str(amount)
 	refresh_player_ui(playerID)

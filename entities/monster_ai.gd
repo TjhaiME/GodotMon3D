@@ -75,6 +75,9 @@ func set_up_empty_input_data(input_data):
 	input_data["jump_pressed"] = false
 	input_data["dodge_released"] = false
 	input_data["jump_released"] = false
+	input_data["interact_pressed"] = false
+	input_data["interact_held"] = false
+	input_data["interact_released"] = false
 	
 	return input_data
 

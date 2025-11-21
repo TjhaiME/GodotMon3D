@@ -111,3 +111,165 @@ var releaseMoveStates = {
 	#"Demon" : "res://assets/monsters/quaternius/glTF/Alien.gltf",
 	#"Dino" : "res://assets/monsters/quaternius/glTF/Alien.gltf",
 #}
+
+
+
+
+var itemData = {
+	"potion" : {
+		"cost" : 10,
+		"maxLimit" : 10,
+		"description" : "heals 20 HP",
+		"affects" : ["monster"],
+		"heal" : 10,
+	},
+	"poison" : {
+		"cost" : 5,
+		"maxLimit" : 20,
+		"description" : "if thrown deals 20 Damage to target hit",
+		"affects" : ["monster"],
+		"heal" : -20,
+	},
+	"maxPotion" : {
+		"cost" : 50,
+		"maxLimit" : 3,
+		"description" : "heals 9999 HP",
+		"affects" : ["monster"],
+		"heal" : 9999,
+	},
+	"poop" : {
+		"cost" : 0,
+		"maxLimit" : 99,
+		"description" : "a stupid item just for testing",
+		"affects" : ["monster"]
+	},
+	"stamina leaf" : {
+		"cost" : 1,
+		"maxLimit" : 99,
+		"description" : "restores % 25 stamina",
+		"affects" : ["monster"],
+		"stamRegen" : 25
+	},
+	"stamina fruit" : {
+		"cost" : 20,
+		"maxLimit" : 10,
+		"description" : "restores % 100 stamina",
+		"affects" : ["monster"],
+		"stamRegen" : 100
+	},
+	"stamina poison" : {
+		"cost" : 3,
+		"maxLimit" : 99,
+		"description" : "removes % 50 stamina",
+		"affects" : ["monster"],
+		"stamRegen" : -50
+	},
+	"toxic grenade" : {
+		"cost" : 30,
+		"maxLimit" : 10,
+		"description" : "throw to induce a poison status effect on a target",
+		"affects" : ["monster"],
+		"statusAilment" : 1
+	},
+	"paralysis grenade" : {
+		"cost" : 30,
+		"maxLimit" : 10,
+		"description" : "throw to induce a paralysis status effect on a target",
+		"affects" : ["monster"],
+		"statusAilment" : 2
+	},
+	"burn grenade" : {
+		"cost" : 30,
+		"maxLimit" : 10,
+		"description" : "throw to induce a burn status effect on a target",
+		"affects" : ["monster"],
+		"statusAilment" : 3
+	},#"stamina fruit", "stamina poison", "toxic grenade", "paralysis grenade", "burn grenade"
+	"freeze grenade" : {
+		"cost" : 30,
+		"maxLimit" : 10,
+		"description" : "throw to induce a freeze status effect on a target",
+		"affects" : ["monster"],
+		"statusAilment" : 4
+	},
+	"sleep grenade" : {
+		"cost" : 30,
+		"maxLimit" : 10,
+		"description" : "throw to induce a sleep status effect on a target",
+		"affects" : ["monster"],
+		"statusAilment" : 5
+	},
+	"confuse grenade" : {
+		"cost" : 30,
+		"maxLimit" : 10,
+		"description" : "throw to induce a confuse status effect on a target",
+		"affects" : ["monster"],
+		"statusAilment" : 6
+	},
+	"heal status potion" : {
+		"cost" : 30,
+		"maxLimit" : 10,
+		"description" : "throw/use to remove status ailment effects on a target",
+		"affects" : ["monster"],
+		"statusAilment" : 0
+	},
+	"item10" : {
+		"cost" : 4,
+		"maxLimit" : 99,
+		"description" : "a stupid item just for testing 10",
+		"affects" : ["monster"]
+	},
+	"item11" : {
+		"cost" : 5,
+		"maxLimit" : 99,
+		"description" : "a stupid item just for testing 11",
+		"affects" : ["monster"]
+	},
+}
+
+#items, like moves, and monsterDex entries should be able to be changed with just a dataset
+
+func use_item(itemName, charNode, charType = "monster"):
+	if ! itemData[itemName]["affects"].has(charType):
+		print("cannot use item on this character type")
+		return false
+	
+	#"hitStats" : {
+		#"stat" : "HP",
+		#"amount" : 9999
+	#}
+	if itemData[itemName].has("heal"):
+		#we want to heal hp
+		var amount = itemData[itemName]["heal"]
+		charNode.stats["HP"] += amount
+		if charNode.stats["HP"] > charNode.stats["maxHP"]:
+			charNode.stats["HP"] = charNode.stats["maxHP"]
+		elif charNode.stats["HP"] < 0.0:
+			charNode.stats["HP"] = 0.0
+			#do I need to kill the monster here...
+			charNode.check_if_died()
+	#"stamRegen" : 25
+	if itemData[itemName].has("stamRegen"):
+		#we want to heal hp
+		var amount = itemData[itemName]["stamRegen"]
+		charNode.stats["stamina"] += (float(amount)/100.0)*charNode.stats["maxStamina"]
+		if charNode.stats["stamina"] > charNode.stats["maxStamina"]:
+			charNode.stats["stamina"] = charNode.stats["maxStamina"]
+		elif charNode.stats["stamina"] < 0.0:
+			charNode.stats["stamina"] = 0.0
+	
+	#"statusAilment"
+	if itemData[itemName].has("statusAilment"):
+		#charNode.stats["ailment"] = itemData[itemName]["statusAilment"]
+		#charNode.stats["ailCount"] = 10.0#seconds of the effect
+		#charNode.randAilmentThreshold = 0.1
+		charNode.switch_status_ailment_state(itemData[itemName]["statusAilment"], 10.0)
+	
+	
+	
+	
+	#item was used we must remove 1 from inventory
+	charNode.masterNodeRef.players[charNode.playerID]["inventory"][itemName] -= 1
+	if charNode.masterNodeRef.players[charNode.playerID]["inventory"][itemName] <= 0:
+		charNode.masterNodeRef.players[charNode.playerID]["inventory"].erase(itemName)
+	return true

@@ -35,6 +35,11 @@ func get_input_data() -> Dictionary:
 	input_data["jump_pressed"] = Input.is_action_just_pressed("jump_p2")
 	input_data["dodge_released"] = Input.is_action_just_released("dodge_p2")
 	input_data["jump_released"] = Input.is_action_just_released("jump_p2")
+	
+	input_data["interact_pressed"] = Input.is_action_just_pressed("interact_p2")
+	input_data["interact_held"] = Input.is_action_pressed("interact_p2")
+	input_data["interact_released"] = Input.is_action_just_released("interact_p2")
+	
 	#print(input_data)
 	
 	return input_data

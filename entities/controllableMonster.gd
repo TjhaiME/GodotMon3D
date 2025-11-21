@@ -82,6 +82,7 @@ var ailmentIDs = {
 	
 }
 
+
 var stats = {} #stats for this monster (some can be moved to the database, or retrieved from there)
 	#MOVED TO masterNode
 	#"name" : "",
@@ -94,7 +95,7 @@ var stats = {} #stats for this monster (some can be moved to the database, or re
 	#
 	##STATUS EFFECTS:
 	#"ailment" : 0,##0 is none, see above
-	#"ailCount" : 0.0,#a float to record or healing process
+	#"ailCount" : 0.0,#a float to record or healing process, we should set this when we get the effect, so we can have stronger moves with effects that last longer
 	#"ailTimer" : 0.0,#a float for recording the periodic timer for status effects, (we can increase it by random intervals each frame)
 	#
 	#"HP" : 150,
@@ -232,6 +233,21 @@ var lastFinishedAnim = ""
 var climb_normal: Vector3 = Vector3.ZERO
 var climb_speed: float = 5.0
 
+
+
+var interactNode = null#for nodes we interact with, like an npc we talk to
+func setInteractNode(interactNodeRef):
+	interactNode = interactNodeRef
+func removeInteractNode(interactNodeRef):
+	if interactNode == interactNodeRef:
+		interactNode = null
+
+
+func _on_body_exited(body: Node3D) -> void:
+	print("body exited interact zone 1")
+	if body.has_method("removeInteractNode"):
+		if body.removeInteractNode() == self:
+			body.interactNode = null
 ##############
 ############################
 ##########################################
@@ -249,7 +265,26 @@ func on_set_control():
 	for key in cooldownMod.keys():
 		cooldowns[key] += cooldownMod[key]
 	cooldownMod = {}
+	
+	
+	
+	masterNodeRef.update_inventory_ui(selectedInventoryIndex, playerID)
 
+var randAilmentThreshold = 0.1
+var selectedInventoryIndex = 0
+
+func switch_status_ailment_state(newStateNumber, newTimer = 10.0):
+	#when setting a negative status ailment we need to set a timer too
+	stats["ailCount"] = newTimer
+	stats["ailment"] = newStateNumber
+	randAilmentThreshold = 0.1
+	if newStateNumber == ailmentIDs["none"]:
+		stats["ailTimer"] = 0.0
+	else:
+		stats["ailTimer"] = newTimer
+	var condition = ailmentIDs.keys()[stats["ailment"]]
+	var timerString = str(stats["ailCount"])
+	masterNodeRef.update_status_ui(condition, timerString, playerID)
 
 func handle_input(delta: float, input_data: Dictionary) -> void:
 	standingStill = false
@@ -267,13 +302,113 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 			masterNodeRef.update_generalCooldown_lock_visual(false, playerID)
 		return
 
+#############################################
+## start staus ailment process
+###########
+#we need to implement ailment thingos
+	#var ailmentIDs = {
+	#"none" : 0,
+	#"poisoned" : 1,#take periodic damage over time
+	#"paralysed" : 2,#flinch periodically over time
+	#"burned" : 3,#random chance of flinch or damage (unreliable)
+	#"frozen" : 4,#immobile, wakes more with special attacks (warming the ice?)
+	#"sleeping" : 5,#immobile wakes more faster with physical attacks (slapped in the face)
+	#"confused" : 6,#affects movement (move opposite to stick, or add swagger/random dir mods to walks/attacks)
+	#### bleeding = take damage based on movement
+#}
+#has to be here so that paralysis can stop us having input
+#the count has to be in process so it changes even if we arent using input...or does it
+	var movementMod = 1.0
+	if stats["ailment"] != 0:
+		stats["ailCount"] -= delta
+		var condition = ailmentIDs.keys()[stats["ailment"]]
+		var timerString = str(stats["ailCount"])
+		masterNodeRef.update_status_ui(condition, timerString, playerID)
+		if stats["ailCount"] <= 0.0:
+			switch_status_ailment_state(ailmentIDs["none"])
+		stats["ailTimer"] += delta
+		#var resetAilTimer = false
+		if stats["ailment"] == ailmentIDs["poisoned"]:
+			if stats["ailTimer"] > randAilmentThreshold:
+				stats["ailTimer"] = 0.0
+				randAilmentThreshold = 0.2 + 0.8*randf()
+				stats["HP"] -= (1.0/25.0)*stats["maxHP"]#lose 1/25 of health evcery time
+		elif stats["ailment"] == ailmentIDs["paralysed"]:
+			var sign = sign(randAilmentThreshold)
+			if stats["ailTimer"] > abs(randAilmentThreshold):
+				stats["ailTimer"] = 0.0
+				if sign == -1:
+					randAilmentThreshold = (0.2 + 0.3*randf())
+				else:
+					randAilmentThreshold = -0.15#paralysis time (minus just tells us which state)
+					#this is the part that plays once
+					if movement_state == movement_states["grounded"]:
+						velocity = Vector3.ZERO
+						switch_animation("Idle")
+					##TODO: we also need to start emitting on the particle effect here
+			if sign == -1:
+				#print("paralysed cant move")
+				#print("randAilmentThreshold = ", randAilmentThreshold, ", stats['ailTimer'] = ", stats["ailTimer"])
+				return#skip input #single frame skip not enough
+			#else:
+				#print("NOT PARALYSED")
+				#print("randAilmentThreshold = ", randAilmentThreshold, ", stats['ailTimer'] = ", stats["ailTimer"])
+		elif stats["ailment"] == ailmentIDs["burned"]:
+			if stats["ailTimer"] > randAilmentThreshold:
+				stats["ailTimer"] = 0.0
+				randAilmentThreshold = 0.2 + 0.6*randf()
+				if (randi()%2) == 0:
+					return
+				stats["HP"] -= (1.0/20.0)*stats["maxHP"]#lose 1/20 of health evcery time
+		elif stats["ailment"] == ailmentIDs["confused"]:
+			
+			##method 1:
+			#if sign(randAilmentThreshold) == 1:
+				#movementMod = 1.0
+				#if stats["ailTimer"] > randAilmentThreshold:
+					#stats["ailTimer"] = 0.0
+					#randAilmentThreshold = -1.0*(0.2 + 0.6*randf())
+			#else:
+				#movementMod = -1.0
+				##stats["ailTimer"] -= 2.0*delta #since we add stats["ailTimer"] += delta
+				#if stats["ailTimer"] > -1.0*randAilmentThreshold:
+					#stats["ailTimer"] = 0.0
+					#randAilmentThreshold = 1.0*(0.2 + 0.6*randf())
+			#
+			##method 2:
+			#movementMod = sign(randAilmentThreshold)
+			#input_data["move"] *= movementMod
+			#if stats["ailTimer"] > abs(randAilmentThreshold):
+				#stats["ailTimer"] = 0.0
+				#randAilmentThreshold = -1.0 * movementMod * (0.2 + 0.3*randf())
+			
+			##METHOD 3:
+			var sign = sign(randAilmentThreshold)
+			if stats["ailTimer"] > abs(randAilmentThreshold):
+				stats["ailTimer"] = 0.0
+				if sign == -1:
+					randAilmentThreshold = (0.2 + 0.3*randf())
+				else:
+					randAilmentThreshold = -(0.2 + 0.3*randf())#confusion time (minus just tells us which state)
+					##TODO: we also need to start emitting on the particle effect here
+			if sign == -1:
+				input_data["move"] *= -1.0
+			elif stats["ailment"] == ailmentIDs["frozen"] or stats["ailment"] == ailmentIDs["sleeping"]:
+				return#unable to do anything
+#############################################
+## end staus ailment process
+###########
+
+
+
 	if busyDodging:
 		physical_dodge_process(delta, input_data)
 		return
 
-	var move_input: Vector2 = input_data["move"]
-	if move_input.length() > 0.1:
-		print("move_input = ", move_input)
+	var move_input: Vector2 = input_data["move"]# (movementMod is just for confusion)
+	
+	#if move_input.length() > 0.1:
+		#print("move_input = ", move_input)
 	#var move_dir = (transform.basis * Vector3(move_input.x, 0, move_input.y)).normalized()
 	var move_dir = Vector3(0.0,0.0,0.0)
 	##Move dir changes based on our movement state
@@ -285,31 +420,17 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 #
 ##upTapped starts as false, if we press up it goes to true for a short time then it has to go back to neutral before being pressed again
 ##if it is tapped again and we are on the ground we enter the running state until the movevec goes to zero (larger range so we can turn)
-		var checkUpRunThreshold = 0.75
-		var upDirPressed = -1.0*move_input.y
-		if upTapped == 0:
-			if upDirPressed > checkUpRunThreshold:
-				upTapped = 1#first tap up
-				doubleTapTimer = 0.4
-		elif upTapped == 1:
-			if upDirPressed < checkUpRunThreshold:
-				upTapped = 2#stick returns
-				doubleTapTimer += 0.1 #give slightly more time
-		elif upTapped == 2:
-			if upDirPressed > checkUpRunThreshold:
-				upTapped = 3#second tap up
-		else: #we should be running
-			if upDirPressed <= 0.0:
-				upTapped = 0 #stop running
-				doubleTapTimer = 0.0
+		
+		check_toggle_run(move_input)
+		
 		
 		#pass#test
 		#commenting out the below line makes all movement stop
 		#when moving backwards we jitter a lot
 		
 		move_dir = (-move_input.y*global_transform.basis.z -move_input.x*global_transform.basis.x).normalized()
-		if move_dir.length() > 0.1:
-			print("grounded move_dir = ", move_dir)
+		#if move_dir.length() > 0.1:
+			#print("grounded move_dir = ", move_dir)
 	elif movement_state == movement_states["climbing"]:
 		print("climbing wall movement")
 		var input_vec = Vector3(-move_input.x, -move_input.y, 0)
@@ -386,8 +507,39 @@ func handle_input(delta: float, input_data: Dictionary) -> void:
 	if input_data["jump_pressed"]:
 		if movement_state == movement_states["grounded"]:
 			start_jump(input_data)
+	
+	if input_data["interact_pressed"]:
+		print("interact pressed")
+		if interactNode != null:
+			interactNode.interact(self)
+	elif input_data["interact_held"]:
+		##TODO
+		if input_data["attack_A_pressed"]:
+			#[selectedInventoryIndex]
+			#use_item()
+			var invKeys = masterNodeRef.players[playerID]["inventory"].keys()
+			if invKeys.size() > 0:
+				
+				var itemName = invKeys[selectedInventoryIndex%invKeys.size()]
+				central.use_item(itemName, self, "monster")
+				masterNodeRef.update_inventory_ui(selectedInventoryIndex, playerID)
+			pass
+		elif input_data["attack_Y_pressed"]:
+			##TODO
+			#throw_item()
+			#masterNodeRef.update_inventory_ui(invIndex, playerID)
+			pass
+		elif input_data["attack_X_pressed"]:
+			selectedInventoryIndex -= 1
+			masterNodeRef.update_inventory_ui(selectedInventoryIndex, playerID)
+			pass
+		elif input_data["attack_B_pressed"]:
+			selectedInventoryIndex += 1
+			masterNodeRef.update_inventory_ui(selectedInventoryIndex, playerID)
+			pass
+		
 
-	if input_data["dodge_pressed"]:
+	elif input_data["dodge_pressed"]:
 		
 		#TODO:
 		#rewrite this system so that dodge on it's own is guard
@@ -534,6 +686,42 @@ func isRunning():
 		return true
 	return false
 
+
+func check_toggle_run(move_input):
+	##############################
+	##  check if should toggle run
+	#################
+	var checkUpRunThreshold = 0.75
+	var upDirPressed = -1.0*move_input.y
+	
+	var upPressedThisFrame = false
+	var sidePressedThisFrame = false
+	
+	if abs(move_input.x) > 0.3:
+		sidePressedThisFrame = true
+	
+	if upDirPressed > checkUpRunThreshold:
+		upPressedThisFrame = true
+
+	
+	if upTapped == 0:
+		if upPressedThisFrame == true and sidePressedThisFrame == false:
+			upTapped = 1#first tap up
+			doubleTapTimer = 0.4
+	elif upTapped == 1:
+		if upPressedThisFrame == false and sidePressedThisFrame == false:
+		#if upPressedThisFrame == false:
+			upTapped = 2#stick returns
+			doubleTapTimer += 0.1 #give slightly more time
+	elif upTapped == 2:
+		if upPressedThisFrame == true and sidePressedThisFrame == false:
+			upTapped = 3#second tap up
+	else: #we should be running
+		if upDirPressed <= 0.0:
+			upTapped = 0 #stop running
+			doubleTapTimer = 0.0
+	#############################################################
+
 func raycast(origin: Vector3, direction: Vector3, length: float = 1.5, mask: int = 1 << 8) -> Dictionary:# mask: int = 1 << 8
 	
 #Summary:
@@ -564,6 +752,10 @@ func raycast(origin: Vector3, direction: Vector3, length: float = 1.5, mask: int
 func end_attack(attackHitboxNode):
 	#var atkNode = get_node_or_null("Attack")#must set name or do slam as an extension of the hitbox
 	attackHitboxNode.queue_free()
+
+func check_if_died():
+	if stats["HP"] <= 0:
+		enter_KO_state()
 
 func enter_KO_state():
 	print("should have died...")
@@ -1073,10 +1265,12 @@ func _process(delta: float) -> void:
 		var guardStaminaMult = 5.0
 		staminaGain -= guardStaminaMult*delta
 	elif standingStill:
-		staminaGain += (float(stats["stamRegen"])/50.0)*delta
+		#we gain even more stamina back when standing still
+		staminaGain += 2.0*(float(stats["stamRegen"])/50.0)*delta
 	
 	#doubleTap timers
 	if isRunning() == false:
+		staminaGain += (float(stats["stamRegen"])/50.0)*delta
 		doubleTapTimer -= delta
 		if doubleTapTimer < 0.0:
 			doubleTapTimer = 0.0
@@ -1168,6 +1362,12 @@ func _process(delta: float) -> void:
 		else:
 			velocity.y = 0  # reset vertical velocity when on floor
 			movement_state = movement_states["grounded"]
+			if is_controlled == false:
+				###TODO QUICK BUGFIX,
+				##if we walk into an interaction zone and interact with it while walking,
+				## we lose control of the monster but it keeps walking
+				##this didnt happen with spawned attacks, probably because the attack excludes movement.
+				velocity = Vector3.ZERO
 
 	
 	move_and_slide()

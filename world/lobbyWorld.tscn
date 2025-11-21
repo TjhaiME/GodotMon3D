@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://c1dq3yiohoh05"]
+[gd_scene load_steps=2 format=3 uid="uid://c1dq3yiohoh05"]
 
-[node name="Node3D" type="Node3D"]
+[ext_resource type="Script" uid="uid://bwcn0ygcwavhq" path="res://world/lobby_world.gd" id="1_pqtnx"]
+
+[node name="lobbyWorld" type="Node3D"]
+script = ExtResource("1_pqtnx")
