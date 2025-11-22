@@ -256,6 +256,8 @@ func _ready():
 			"input_provider": provider,
 			"current_controller": null,
 			"previous_controller": null,
+			"active_char": null,
+			"active_char_type": "",
 			"camera": null,
 			"viewport": null,#the viewport for seeing the screen
 			"container": null,

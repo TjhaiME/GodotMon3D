@@ -1,3 +1,8 @@
+the masterNode players dic needs to know who the playersactive char is
+set it on set control  fpr the chars
+
+
+
 we have inventory and items now
 do status spawning effects as a function
 and do staus in ui

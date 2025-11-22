@@ -260,15 +260,16 @@ func _on_body_exited(body: Node3D) -> void:
 
 func on_set_control():
 	
-	
 	#add extra cooldown from attacks and stuff
 	for key in cooldownMod.keys():
 		cooldowns[key] += cooldownMod[key]
 	cooldownMod = {}
 	
-	
-	
 	masterNodeRef.update_inventory_ui(selectedInventoryIndex, playerID)
+
+	masterNodeRef.players[playerID]["active_char"] = self
+	masterNodeRef.players[playerID]["active_char_type"] = "monster"
+
 
 var randAilmentThreshold = 0.1
 var selectedInventoryIndex = 0

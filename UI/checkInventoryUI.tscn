@@ -33,11 +33,28 @@ layout_mode = 2
 text = "Your inventory"
 horizontal_alignment = 1
 
-[node name="ButtonExample" type="Button" parent="VBoxContainer"]
+[node name="BagSlots" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="OpenInventory" type="Button" parent="VBoxContainer/BagSlots"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Open Inventory"
+
+[node name="OpenMoves" type="Button" parent="VBoxContainer/BagSlots"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Open Move Screen"
+
+[node name="Inventory" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonExample"]
+[node name="ButtonExample" type="Button" parent="VBoxContainer/Inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Inventory/ButtonExample"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,17 +62,336 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="itemName" type="Label" parent="VBoxContainer/ButtonExample/HBoxContainer"]
+[node name="itemName" type="Label" parent="VBoxContainer/Inventory/ButtonExample/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 
-[node name="inInventory" type="Label" parent="VBoxContainer/ButtonExample/HBoxContainer"]
+[node name="inInventory" type="Label" parent="VBoxContainer/Inventory/ButtonExample/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 
-[node name="description" type="Label" parent="VBoxContainer/ButtonExample/HBoxContainer"]
+[node name="description" type="Label" parent="VBoxContainer/Inventory/ButtonExample/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+
+[node name="Moves" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="A" type="VBoxContainer" parent="VBoxContainer/Moves"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Moves/A"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonName" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "A"
+horizontal_alignment = 1
+
+[node name="Element" type="VBoxContainer" parent="VBoxContainer/Moves/A/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/Element"]
+layout_mode = 2
+
+[node name="ElementTitle" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Element"
+horizontal_alignment = 1
+
+[node name="ElementName" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "El2"
+
+[node name="MainStats" type="VBoxContainer" parent="VBoxContainer/Moves/A/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PhysOrSpcl" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/MainStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PhysOrSpcl"
+
+[node name="Power" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/MainStats"]
+layout_mode = 2
+text = "Power:"
+
+[node name="Cooldown" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/MainStats"]
+layout_mode = 2
+
+[node name="OtherStats" type="VBoxContainer" parent="VBoxContainer/Moves/A/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Range" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "range:"
+
+[node name="Life" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "life:"
+
+[node name="Speed" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "controlSpd:"
+
+[node name="ExtraFuncs" type="VBoxContainer" parent="VBoxContainer/Moves/A/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Moves/A/HBoxContainer/ExtraFuncs"]
+layout_mode = 2
+text = "Extra Abilities"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Moves/A/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EDIT"
+
+[node name="B" type="VBoxContainer" parent="VBoxContainer/Moves"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Moves/B"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonName" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "B"
+horizontal_alignment = 1
+
+[node name="Element" type="VBoxContainer" parent="VBoxContainer/Moves/B/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/Element"]
+layout_mode = 2
+
+[node name="ElementTitle" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Element"
+horizontal_alignment = 1
+
+[node name="ElementName" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "El2"
+
+[node name="MainStats" type="VBoxContainer" parent="VBoxContainer/Moves/B/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PhysOrSpcl" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/MainStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PhysOrSpcl"
+
+[node name="Power" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/MainStats"]
+layout_mode = 2
+text = "Power:"
+
+[node name="Cooldown" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/MainStats"]
+layout_mode = 2
+
+[node name="OtherStats" type="VBoxContainer" parent="VBoxContainer/Moves/B/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Range" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "range:"
+
+[node name="Life" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "life:"
+
+[node name="Speed" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "controlSpd:"
+
+[node name="ExtraFuncs" type="VBoxContainer" parent="VBoxContainer/Moves/B/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Moves/B/HBoxContainer/ExtraFuncs"]
+layout_mode = 2
+text = "Extra Abilities"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Moves/B/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EDIT"
+
+[node name="X" type="VBoxContainer" parent="VBoxContainer/Moves"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Moves/X"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonName" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+horizontal_alignment = 1
+
+[node name="Element" type="VBoxContainer" parent="VBoxContainer/Moves/X/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/Element"]
+layout_mode = 2
+
+[node name="ElementTitle" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Element"
+horizontal_alignment = 1
+
+[node name="ElementName" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "El2"
+
+[node name="MainStats" type="VBoxContainer" parent="VBoxContainer/Moves/X/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PhysOrSpcl" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/MainStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PhysOrSpcl"
+
+[node name="Power" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/MainStats"]
+layout_mode = 2
+text = "Power:"
+
+[node name="Cooldown" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/MainStats"]
+layout_mode = 2
+
+[node name="OtherStats" type="VBoxContainer" parent="VBoxContainer/Moves/X/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Range" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "range:"
+
+[node name="Life" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "life:"
+
+[node name="Speed" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "controlSpd:"
+
+[node name="ExtraFuncs" type="VBoxContainer" parent="VBoxContainer/Moves/X/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Moves/X/HBoxContainer/ExtraFuncs"]
+layout_mode = 2
+text = "Extra Abilities"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Moves/X/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EDIT"
+
+[node name="Y" type="VBoxContainer" parent="VBoxContainer/Moves"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Moves/Y"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonName" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Y"
+horizontal_alignment = 1
+
+[node name="Element" type="VBoxContainer" parent="VBoxContainer/Moves/Y/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/Element"]
+layout_mode = 2
+
+[node name="ElementTitle" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Element"
+horizontal_alignment = 1
+
+[node name="ElementName" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/Element"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "El2"
+
+[node name="MainStats" type="VBoxContainer" parent="VBoxContainer/Moves/Y/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PhysOrSpcl" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/MainStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PhysOrSpcl"
+
+[node name="Power" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/MainStats"]
+layout_mode = 2
+text = "Power:"
+
+[node name="Cooldown" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/MainStats"]
+layout_mode = 2
+
+[node name="OtherStats" type="VBoxContainer" parent="VBoxContainer/Moves/Y/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Range" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "range:"
+
+[node name="Life" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "life:"
+
+[node name="Speed" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/OtherStats"]
+layout_mode = 2
+text = "controlSpd:"
+
+[node name="ExtraFuncs" type="VBoxContainer" parent="VBoxContainer/Moves/Y/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Moves/Y/HBoxContainer/ExtraFuncs"]
+layout_mode = 2
+text = "Extra Abilities"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Moves/Y/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EDIT"
+
+[connection signal="pressed" from="VBoxContainer/BagSlots/OpenInventory" to="." method="_on_open_inventory_pressed"]
+[connection signal="pressed" from="VBoxContainer/BagSlots/OpenMoves" to="." method="_on_open_moves_pressed"]

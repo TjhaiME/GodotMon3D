@@ -366,9 +366,16 @@ func nav_right():
 var coolDownTimer = 0.0
 var buttonCoolDown = 0.2
 
+func extra_handle_input(delta: float, input_data: Dictionary) -> void:
+	#intended to be overwritten by code that extends this script
+	pass
+	#this is so we have something to overwrite and put handle_input code on the parent
+
 func handle_input(delta: float, input_data: Dictionary) -> void:
 	if not is_controlled:
 		return
+	
+	extra_handle_input(delta, input_data)
 	
 	if coolDownTimer > 0.0:
 		coolDownTimer -= delta
