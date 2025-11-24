@@ -83,6 +83,9 @@ var ailmentIDs = {
 }
 
 
+
+var known_moves = [] #for singleplayer we want to be able to switch out moves and never forget them (going to a move rememberer is a hassle and just prevents fast gameplay testing)
+##TODO: for now we just give it every move in known_moves
 var stats = {} #stats for this monster (some can be moved to the database, or retrieved from there)
 	#MOVED TO masterNode
 	#"name" : "",
@@ -655,6 +658,12 @@ func _stats_were_set() -> void:
 	
 	##TODO: connect animation finished signal
 	monsterModel.get_node("AnimationPlayer").connect("animation_finished", Callable(self, "on_animation_finished"))
+	
+	#we also need to tell it which moves it knows
+	#for now give it every possible move
+	#at this point moveData should be populated with all the extra elemental moves
+	known_moves = masterNodeRef.get_node("AttacksData").moveData.keys().duplicate()
+
 
 func _ready() -> void:
 	print("setting up monster ", self)

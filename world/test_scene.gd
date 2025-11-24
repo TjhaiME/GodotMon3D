@@ -34,8 +34,8 @@ var monsterData = {
 		"climb" : 45.0, #allows us to walk up steeper hills
 		
 		"moves" : {
-			"A" : "Beam",
-			"B" : "Breath",
+			"A" : "Electric Beam",
+			"B" : "Fire Breath",
 			"X" : "Charge Punch",
 			"Y" : "Slam"
 		},
@@ -79,8 +79,8 @@ var monsterData = {
 		"climb" : 45.0, #allows us to walk up steeper hills
 		
 		"moves" : {
-			"A" : "Beam",
-			"B" : "Breath",
+			"A" : "Electric Beam",
+			"B" : "Fire Breath",
 			"X" : "Charge Punch",
 			"Y" : "Slam"
 		},

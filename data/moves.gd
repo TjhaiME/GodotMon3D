@@ -56,9 +56,13 @@ func get_damage_type_multiplier(atkType, defenderType1, defenderType2 = ""):
 
 
 func _ready() -> void:
-	print("dmgMult1 = ", get_damage_type_multiplier("Fire", "Plant", ""))
-	print("dmgMult2 = ", get_damage_type_multiplier("Fire", "Plant",  "Ice"))
-
+	#print("dmgMult1 = ", get_damage_type_multiplier("Fire", "Plant", ""))
+	#print("dmgMult2 = ", get_damage_type_multiplier("Fire", "Plant",  "Ice"))
+	
+	
+	#Adds things like Ice Punch and Fire Beam etc.
+	add_elemental_move_variants_to_moveData()
+	
 
 #add a flags variable and a flagsType variable
 #flagType can be type addition, type subtraction, override, blacklist
@@ -99,6 +103,9 @@ var basePower = 50#make a number between [0,100]
 #beam, breath, punch all need to be modified to be general moves that get added
 
 
+
+
+
 var moveData = {
 	"Dodge" : {
 		"icon" : "res://assets/icons/attacks/dodge.png",
@@ -119,47 +126,8 @@ var moveData = {
 		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power (but some of this can also be done with atkType)
 		#"secondaryAtkFunc" : ""#another function for other variable things, like status effects
 	},
-	"Fire Punch" : {
-		"icon" : "res://assets/icons/attacks/punch.png",
-		"scene" : "res://attacks/base/punch.tscn", #summon a base scene with a mesh visual effect
-		"visual" : "res://effects/electric.tscn", #visual effect to represent the element
-		"radius" : 0.4, #width of attack
-		"power" : 1.5*basePower, #75 as a multiple of basePower so we can tweak later
-		"element" : "Fire", #element type of attack
-		"atkType" : "punch", #some monsters could have abilities to power up certain types of moves, can also use to determine how to do the attack
-		"special" : false, #physical or special attack
-		"range" : 3.0, #how far before attack disappears, set as negative for infinite
-		"lifetime" : 1.5, #how long does it last
-		"controllableSpeed" : 5.0,
-		"releaseSpeed" : 10.0,
-		"rotationSpeed" : 10.0,
-		"cost": 5.0,#for testing #was 60.0,#how much "cooldown" does it cost to use this move, 60 means we can use once then wait a little bit and use again in succession but then we have to recharge heapse
-		#"extraCooldownFunc" : "", #no function to generate extra cost to the atack while we are controlling the attack
-		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power
-		#"secondaryAtkFunc" : "",#another function for other variable things, like status effects
-		"craterRadius" : 10.0,#adds a crater when it hits the floor,
-	},
 	
-	"Ice Punch" : {
-		"icon" : "res://assets/icons/attacks/punch.png",
-		"scene" : "res://attacks/base/punch.tscn", #summon a base scene with a visual effect
-		"visual" : "res://effects/ice.tscn", #visual effect
-		"radius" : 0.4, #width of attack
-		"power" : 1.5*basePower, #75 as a multiple of basePower so we can tweak later
-		"element" : "Ice", #element type of attack
-		"atkType" : "punch", #some monsters could have abilities to power up certain types of moves, can also use to determine how to do the attack
-		"special" : false, #physical or special attack
-		"range" : 3.0, #how far before attack disappears, set as negative for infinite
-		"lifetime" : 1.5, #how long does it last
-		"controllableSpeed" : 5.0,
-		"releaseSpeed" : 10.0,
-		"rotationSpeed" : 10.0,
-		"cost": 5.0,#for testing #was 60.0,#how much "cooldown" does it cost to use this move, 60 means we can use once then wait a little bit and use again in succession but then we have to recharge heapse
-		#"extraCooldownFunc" : "", #no function to generate extra cost to the atack while we are controlling the attack
-		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power
-		#"secondaryAtkFunc" : "",#another function for other variable things, like status effects
-		"craterRadius" : 10.0,#adds a crater hen it hits the floor,
-	},
+	
 	
 	"Drain Punch" : {
 		"icon" : "res://assets/icons/attacks/chargepunch.png",
@@ -208,47 +176,7 @@ var moveData = {
 		"craterRadius" : 1.0,#adds a crater hen it hits the floor,
 	},
 	
-		"Beam" : {#res://attacks/effects/beamBreath.tscn
-		"icon" : "res://assets/icons/attacks/beam.png",
-		"scene" : "res://attacks/beams/beamAttack.tscn",#"res://attacks/base/NodeAttack_Beam.tscn",#"res://attacks/base/AreaAttack_Beam.tscn", #summon a base scene with a visual effect
-		"visual" : "res://effects/electric.tscn", #visual effect
-		"radius" : 0.4, #width of attack
-		"power" : 1.5*basePower, #75 as a multiple of basePower so we can tweak later
-		"element" : "Electric", #element type of attack
-		"atkType" : "beam", #some monsters could have abilities to power up certain types of moves, can also use to determine how to do the attack
-		"special" : true, #physical or special attack
-		"range" : -1.0, #how far before attack disappears, set as negative for infinite
-		"lifetime" : 3.5, #how long does it last
-		"controllableSpeed" : 0.0,
-		"releaseSpeed" : 5.0,
-		"rotationSpeed" : 10.0,
-		"cost": 5.0,#for testing #was 60.0,#how much "cooldown" does it cost to use this move, 60 means we can use once then wait a little bit and use again in succession but then we have to recharge heapse
-		#"extraCooldownFunc" : "", #no function to generate extra cost to the atack while we are controlling the attack
-		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power (but some of this can also be done with atkType)
-		#"secondaryAtkFunc" : "",#another function for other variable things, like status effects
-		"ignoreFloor" : true
-	},
-
-		"Breath" : {#res://attacks/effects/beamBreath.tscn
-		"icon" : "res://assets/icons/attacks/breath.png",
-		"scene" : "res://attacks/beams/breathAttack.tscn",#"res://attacks/base/NodeAttack_Beam.tscn",#"res://attacks/base/AreaAttack_Beam.tscn", #summon a base scene with a visual effect
-		"visual" : "res://effects/electric.tscn", #visual effect
-		"radius" : 0.4, #width of attack
-		"power" : 1.5*basePower, #75 as a multiple of basePower so we can tweak later
-		"element" : "Fire", #element type of attack
-		"atkType" : "beam", #some monsters could have abilities to power up certain types of moves, can also use to determine how to do the attack
-		"special" : true, #physical or special attack
-		"range" : 5.0, #how far before attack disappears, set as negative for infinite
-		"lifetime" : 3.5, #how long does it last
-		"controllableSpeed" : 0.0,
-		"releaseSpeed" : 5.0,
-		"rotationSpeed" : 10.0,
-		"cost": 5.0,#for testing #was 60.0,#how much "cooldown" does it cost to use this move, 60 means we can use once then wait a little bit and use again in succession but then we have to recharge heapse
-		#"extraCooldownFunc" : "", #no function to generate extra cost to the atack while we are controlling the attack
-		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power (but some of this can also be done with atkType)
-		#"secondaryAtkFunc" : "",#another function for other variable things, like status effects
-		"ignoreFloor" : true
-	},
+	
 
 		"Slam" : {
 		"icon" : "res://assets/icons/attacks/slam.png",
@@ -271,23 +199,101 @@ var moveData = {
 		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power (but some of this can also be done with atkType)
 		#"secondaryAtkFunc" : ""#another function for other variable things, like status effects
 	},
-	"Raise Spikes" : {
-		"icon" : "res://assets/icons/attacks/spikes.png",
-		"scene" : "res://attacks/base/spikes.tscn", #summon a base scene with a visual effect
-		"visual" : "res://effects/dark.tscn", #visual effect
+	#"Raise Spikes" : {
+		#"icon" : "res://assets/icons/attacks/spikes.png",
+		#"scene" : "res://attacks/base/spikes.tscn", #summon a base scene with a visual effect
+		#"visual" : "res://effects/dark.tscn", #visual effect
+		#"radius" : 0.4, #width of attack
+		#"power" : 1.5*basePower, #75 as a multiple of basePower so we can tweak later
+		#"element" : "Stone", #element type of attack
+		#"atkType" : "spike", #some monsters could have abilities to power up certain types of moves, can also use to determine how to do the attack
+		#"special" : false, #physical or special attack
+		#"range" : 3.0, #how far before attack disappears, set as negative for infinite
+		#"lifetime" : 1.5, #how long does it last
+		#"controllableSpeed" : 5.0,
+		#"releaseSpeed" : 10.0,
+		#"rotationSpeed" : 0.0,
+		#"cost": 5.0,#for testing #was 60.0,#how much "cooldown" does it cost to use this move, 60 means we can use once then wait a little bit and use again in succession but then we have to recharge heapse
+		##"extraCooldownFunc" : "", #no function to generate extra cost to the atack while we are controlling the attack
+		##"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power (but some of this can also be done with atkType)
+		##"secondaryAtkFunc" : ""#another function for other variable things, like status effects
+	#},
+}
+
+
+
+var elementalBaseMoves = {
+	"Beam" : {#res://attacks/effects/beamBreath.tscn
+		"icon" : "res://assets/icons/attacks/beam.png",
+		"scene" : "res://attacks/beams/beamAttack.tscn",#"res://attacks/base/NodeAttack_Beam.tscn",#"res://attacks/base/AreaAttack_Beam.tscn", #summon a base scene with a visual effect
+		"visual" : "res://effects/electric.tscn", #visual effect
 		"radius" : 0.4, #width of attack
 		"power" : 1.5*basePower, #75 as a multiple of basePower so we can tweak later
-		"element" : "Stone", #element type of attack
-		"atkType" : "spike", #some monsters could have abilities to power up certain types of moves, can also use to determine how to do the attack
+		"element" : "Electric", #element type of attack
+		"atkType" : "beam", #some monsters could have abilities to power up certain types of moves, can also use to determine how to do the attack
+		"special" : true, #physical or special attack
+		"range" : -1.0, #how far before attack disappears, set as negative for infinite
+		"lifetime" : 3.5, #how long does it last
+		"controllableSpeed" : 0.0,
+		"releaseSpeed" : 5.0,
+		"rotationSpeed" : 10.0,
+		"cost": 5.0,#for testing #was 60.0,#how much "cooldown" does it cost to use this move, 60 means we can use once then wait a little bit and use again in succession but then we have to recharge heapse
+		#"extraCooldownFunc" : "", #no function to generate extra cost to the atack while we are controlling the attack
+		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power (but some of this can also be done with atkType)
+		#"secondaryAtkFunc" : "",#another function for other variable things, like status effects
+		"ignoreFloor" : true
+	},
+
+	"Breath" : {#res://attacks/effects/beamBreath.tscn
+		"icon" : "res://assets/icons/attacks/breath.png",
+		"scene" : "res://attacks/beams/breathAttack.tscn",#"res://attacks/base/NodeAttack_Beam.tscn",#"res://attacks/base/AreaAttack_Beam.tscn", #summon a base scene with a visual effect
+		"visual" : "res://effects/electric.tscn", #visual effect
+		"radius" : 0.4, #width of attack
+		"power" : 1.5*basePower, #75 as a multiple of basePower so we can tweak later
+		"element" : "Fire", #element type of attack
+		"atkType" : "beam", #some monsters could have abilities to power up certain types of moves, can also use to determine how to do the attack
+		"special" : true, #physical or special attack
+		"range" : 5.0, #how far before attack disappears, set as negative for infinite
+		"lifetime" : 3.5, #how long does it last
+		"controllableSpeed" : 0.0,
+		"releaseSpeed" : 5.0,
+		"rotationSpeed" : 10.0,
+		"cost": 5.0,#for testing #was 60.0,#how much "cooldown" does it cost to use this move, 60 means we can use once then wait a little bit and use again in succession but then we have to recharge heapse
+		#"extraCooldownFunc" : "", #no function to generate extra cost to the atack while we are controlling the attack
+		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power (but some of this can also be done with atkType)
+		#"secondaryAtkFunc" : "",#another function for other variable things, like status effects
+		"ignoreFloor" : true
+	},
+	"Punch" : {
+		"icon" : "res://assets/icons/attacks/punch.png",
+		"scene" : "res://attacks/base/punch.tscn", #summon a base scene with a mesh visual effect
+		"visual" : "res://effects/electric.tscn", #visual effect to represent the element
+		"radius" : 0.4, #width of attack
+		"power" : 1.5*basePower, #75 as a multiple of basePower so we can tweak later
+		"element" : "Fire", #element type of attack
+		"atkType" : "punch", #some monsters could have abilities to power up certain types of moves, can also use to determine how to do the attack
 		"special" : false, #physical or special attack
 		"range" : 3.0, #how far before attack disappears, set as negative for infinite
 		"lifetime" : 1.5, #how long does it last
 		"controllableSpeed" : 5.0,
 		"releaseSpeed" : 10.0,
-		"rotationSpeed" : 0.0,
+		"rotationSpeed" : 10.0,
 		"cost": 5.0,#for testing #was 60.0,#how much "cooldown" does it cost to use this move, 60 means we can use once then wait a little bit and use again in succession but then we have to recharge heapse
 		#"extraCooldownFunc" : "", #no function to generate extra cost to the atack while we are controlling the attack
-		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power (but some of this can also be done with atkType)
-		#"secondaryAtkFunc" : ""#another function for other variable things, like status effects
+		#"primaryAtkFunc" : "",#a function to help provide variable damage, e.g. speed influences power, or charge for more power
+		#"secondaryAtkFunc" : "",#another function for other variable things, like status effects
+		"craterRadius" : 10.0,#adds a crater when it hits the floor,
 	},
 }
+
+
+func add_elemental_move_variants_to_moveData():
+	for elBaseMoveName in elementalBaseMoves.keys():
+		for element in ["Electric", "Ice", "Fire", "Plant", "Stone", "Water", "Wind"]:
+			var elVariantMove = elementalBaseMoves[elBaseMoveName].duplicate(true)
+			elVariantMove["element"] = element
+			
+			elVariantMove["visual"] = str("res://effects/",element.to_lower(),".tscn")
+			
+			var elVariantName = str(element, " ", elBaseMoveName)
+			moveData[elVariantName] = elVariantMove
