@@ -171,13 +171,13 @@ func set_up_general():
 		set_up_ui()
 		$VBoxContainer/Moves.visible = false
 		$VBoxContainer/Inventory.visible = true
-		$VBoxContainer/MoveEdit.visible = false
+		$VBoxContainer/moveEditScroll.visible = false
 	elif bagSlotState == bagSlotStates["moves"]:
 		var charNode = masterRefNode.players[playerID]["active_char"]
 		set_up_moves_ui(charNode)
 		$VBoxContainer/Inventory.visible = false
 		$VBoxContainer/Moves.visible = true
-		$VBoxContainer/MoveEdit.visible = false
+		$VBoxContainer/moveEditScroll.visible = false
 	#elif bagSlotState == bagSlotStates["moveEdit"]:
 		#var charNode = masterRefNode.players[playerID]["active_char"]
 		#set_up_moves_ui(charNode)
@@ -230,7 +230,7 @@ func set_up_move_edit_screen(buttonChar):
 	##TODO: connect signal from choose button to switch move for that button
 	$VBoxContainer/Inventory.visible = false
 	$VBoxContainer/Moves.visible = false
-	$VBoxContainer/MoveEdit.visible = true
+	$VBoxContainer/moveEditScroll.visible = true
 	#####TODO:
 	#add temporary_nodes and interactable nodes etc 
 	#and cleaniong functions
@@ -258,7 +258,7 @@ func set_up_move_edit_screen(buttonChar):
 			}
 		}
 		set_up_single_move_display(charNode, newDisplaySlot, buttonChar, moveName, customDic)
-		$VBoxContainer/MoveEdit.add_child(newDisplaySlot)
+		$VBoxContainer/moveEditScroll/MoveEdit.add_child(newDisplaySlot)
 		#ControlNodeParent.
 		known_move_nodes.append(newDisplaySlot)
 		var button = newDisplaySlot.get_node("HBoxContainer/Button")

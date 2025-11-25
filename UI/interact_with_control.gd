@@ -251,15 +251,59 @@ func visually_unhighlight_node(node: Control):
 	if node in highlight_overlays:
 		highlight_overlays[node].visible = false
 
-func highlight_node(node: Control):
-	if node == null: return
+func center_control_in_scroll(sc: ScrollContainer, node: Control):
+	var node_rect = node.get_global_rect()
+	var sc_rect = sc.get_global_rect()
 
+	var target_scroll = (
+		node_rect.position.y 
+		+ node_rect.size.y * 0.5
+		- sc_rect.size.y * 0.5
+	)
+
+	sc.scroll_vertical = int(target_scroll)
+#
+#func ensure_visible_in_scroll(node: Control):
+	##smoother but stops working after a while
+	#print("ensure visible in scroll")
+	#var p = node.get_parent()
+	#while p:
+		#if p is ScrollContainer:
+			#center_control_in_scroll(p, node)
+			#return
+		#p = p.get_parent()
+
+
+func ensure_visible_in_scroll(node: Control):
+	print("ensure visible in scroll")
+	var p = node.get_parent()
+	while p:
+		if p is ScrollContainer:
+			p.ensure_control_visible(node)
+			return
+		p = p.get_parent()
+	
+	
+
+#
+#func highlight_node(node: Control):
+	#if node == null: return
+#
+	#if highlightedNode and highlightedNode != node:
+		#visually_unhighlight_node(highlightedNode)
+#
+	#highlightedNode = node
+	#visually_highlight_node(node)
+
+func highlight_node(node: Control):
 	if highlightedNode and highlightedNode != node:
 		visually_unhighlight_node(highlightedNode)
 
 	highlightedNode = node
 	visually_highlight_node(node)
 
+	ensure_visible_in_scroll(node)
+	#refresh_ui()
 
 
 ### -----------------------------

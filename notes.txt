@@ -1,3 +1,9 @@
+We have a move switchintg screen but it also shows us what happens when the ui gets too big
+we need to add a re-center or focus option inside the custom nav
+or add scroll nodes
+
+
+
 the masterNode players dic needs to know who the playersactive char is
 set it on set control  fpr the chars
 
