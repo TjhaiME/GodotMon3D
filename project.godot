@@ -180,3 +180,7 @@ interact_p2={
 "deadzone": 0.2,
 "events": []
 }
+
+[rendering]
+
+textures/lossless_compression/force_png=true

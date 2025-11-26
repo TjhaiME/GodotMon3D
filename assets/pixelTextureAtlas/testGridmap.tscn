@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://vqcdskyrlm4u"]
+
+[ext_resource type="MeshLibrary" uid="uid://bs1del24g77tb" path="res://assets/pixelTextureAtlas/FloorLibrary.tres" id="1_0odnr"]
+[ext_resource type="MeshLibrary" uid="uid://bxdfsu3l0u2jq" path="res://assets/pixelTextureAtlas/WallLibrary.tres" id="2_0odnr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o4tj8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6t8o1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_23x6k"]
+
+[node name="TestGridmap" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9878598, 0.15534838, 0, -0.15534838, 0.9878597, 0, 2.4619565, 3.1109815)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4745274, -6.4767094)
+linear_velocity = Vector3(0, 0, 0.1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_o4tj8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_6t8o1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_23x6k")
+
+[node name="FloorMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_0odnr")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65535, 65535, 68, 65535, 0, 68, 0, 0, 68, 0, 65535, 68)
+}
+
+[node name="WallMap" type="GridMap" parent="."]
+mesh_library = ExtResource("2_0odnr")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(65535, 65535, 68, 65535, 0, 68, 0, 0, 68, 0, 65535, 68)
+}

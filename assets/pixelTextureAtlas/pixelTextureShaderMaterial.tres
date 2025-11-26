@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dx58plnstjuk1"]
+
+[ext_resource type="Shader" uid="uid://gtdph2u5m3yn" path="res://assets/pixelTextureAtlas/pixelTexture.gdshader" id="1_dsrcj"]
+[ext_resource type="Texture2D" uid="uid://elfynspa3q73" path="res://assets/pixelTextureAtlas/atlas.png" id="2_uf8oy"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dsrcj")
+shader_parameter/atlas_tex = ExtResource("2_uf8oy")
+shader_parameter/uv_offset = Vector2(0, 0.334)
+shader_parameter/uv_scale = Vector2(0.071, 0.111)

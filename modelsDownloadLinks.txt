@@ -1,7 +1,18 @@
+terrain for a gridmap:
+	https://fertile-soil-productions.itch.io/modular-terrain-pack
+	(artist says cc0 in comments)
+	https://opengameart.org/content/modular-terrain
+	(also cc0)
+
+
 buildings in mystery dooongooon are fun
 but we havent any special enough chars to use heads as buildings yet
 this quaternius pirate kits has things that could be useful
 https://quaternius.com/packs/piratekit.html
+
+we turned the anchor into a house as a reference to mr Krabs
+https://quaternius.com/packs/ultimateplatformer.html
+this kit has a little red crab we could use
 
 
 cool collections with lots of good spell effects
