@@ -3,25 +3,36 @@
 [ext_resource type="Shader" uid="uid://gtdph2u5m3yn" path="res://assets/pixelTextureAtlas/pixelTexture.gdshader" id="1_vk0ap"]
 [ext_resource type="Texture2D" uid="uid://elfynspa3q73" path="res://assets/pixelTextureAtlas/atlas.png" id="2_0che7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6munc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vk0ap"]
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_tkqtj"]
-material = SubResource("ShaderMaterial_6munc")
+[sub_resource type="PlaneMesh" id="PlaneMesh_0che7"]
+material = SubResource("ShaderMaterial_vk0ap")
 size = Vector2(1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wrs5v"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_6munc"]
 size = Vector3(1, 0.1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tkqtj"]
+render_priority = 0
+shader = ExtResource("1_vk0ap")
+shader_parameter/atlas_tex = ExtResource("2_0che7")
+shader_parameter/uv_offset = Vector2(0.071428575, 0)
+shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wrs5v"]
+material = SubResource("ShaderMaterial_tkqtj")
+size = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lxvcq"]
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.071428575, 0)
+shader_parameter/uv_offset = Vector2(0, 0.11111111)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2p66a"]
@@ -32,7 +43,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0, 0.11111111)
+shader_parameter/uv_offset = Vector2(0.071428575, 0.11111111)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8a7c2"]
@@ -43,7 +54,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.071428575, 0.11111111)
+shader_parameter/uv_offset = Vector2(0.14285715, 0.11111111)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_w2py4"]
@@ -54,7 +65,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.14285715, 0.11111111)
+shader_parameter/uv_offset = Vector2(0.21428573, 0.11111111)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g3f1n"]
@@ -65,7 +76,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.21428573, 0.11111111)
+shader_parameter/uv_offset = Vector2(0.2857143, 0.11111111)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hcqnd"]
@@ -76,7 +87,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.2857143, 0.11111111)
+shader_parameter/uv_offset = Vector2(0.35714287, 0.11111111)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_j077c"]
@@ -87,7 +98,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.35714287, 0.11111111)
+shader_parameter/uv_offset = Vector2(0, 0.22222222)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ulrqj"]
@@ -98,7 +109,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0, 0.22222222)
+shader_parameter/uv_offset = Vector2(0.071428575, 0.22222222)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_46rp4"]
@@ -109,7 +120,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.071428575, 0.22222222)
+shader_parameter/uv_offset = Vector2(0.14285715, 0.22222222)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sv7nm"]
@@ -120,7 +131,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.14285715, 0.22222222)
+shader_parameter/uv_offset = Vector2(0, 0.33333334)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8on40"]
@@ -131,7 +142,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0, 0.33333334)
+shader_parameter/uv_offset = Vector2(0.14285715, 0)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_uqqyk"]
@@ -142,7 +153,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.14285715, 0)
+shader_parameter/uv_offset = Vector2(0.071428575, 0.33333334)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_b4fe7"]
@@ -153,7 +164,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.071428575, 0.33333334)
+shader_parameter/uv_offset = Vector2(0.14285715, 0.33333334)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_il8we"]
@@ -164,7 +175,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.14285715, 0.33333334)
+shader_parameter/uv_offset = Vector2(0.21428573, 0.33333334)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_t0lxo"]
@@ -175,7 +186,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.21428573, 0.33333334)
+shader_parameter/uv_offset = Vector2(0.2857143, 0.33333334)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dm2c2"]
@@ -186,7 +197,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.2857143, 0.33333334)
+shader_parameter/uv_offset = Vector2(0.35714287, 0.33333334)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sjiy8"]
@@ -197,7 +208,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.35714287, 0.33333334)
+shader_parameter/uv_offset = Vector2(0.42857146, 0.33333334)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_15yxd"]
@@ -208,7 +219,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.42857146, 0.33333334)
+shader_parameter/uv_offset = Vector2(0.5, 0.33333334)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hftb1"]
@@ -219,7 +230,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.5, 0.33333334)
+shader_parameter/uv_offset = Vector2(0.5714286, 0.33333334)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_uyp5n"]
@@ -230,7 +241,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.5714286, 0.33333334)
+shader_parameter/uv_offset = Vector2(0, 0.44444445)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4oqtu"]
@@ -241,7 +252,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0, 0.44444445)
+shader_parameter/uv_offset = Vector2(0.071428575, 0.44444445)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7587j"]
@@ -252,7 +263,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.071428575, 0.44444445)
+shader_parameter/uv_offset = Vector2(0.21428573, 0)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sg020"]
@@ -263,7 +274,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.21428573, 0)
+shader_parameter/uv_offset = Vector2(0.14285715, 0.44444445)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2su68"]
@@ -274,7 +285,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.14285715, 0.44444445)
+shader_parameter/uv_offset = Vector2(0.21428573, 0.44444445)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_51lg5"]
@@ -285,7 +296,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.21428573, 0.44444445)
+shader_parameter/uv_offset = Vector2(0.2857143, 0.44444445)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_mkf73"]
@@ -296,7 +307,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.2857143, 0.44444445)
+shader_parameter/uv_offset = Vector2(0.35714287, 0.44444445)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_j7e2f"]
@@ -307,7 +318,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.35714287, 0.44444445)
+shader_parameter/uv_offset = Vector2(0, 0.5555556)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_40w04"]
@@ -318,7 +329,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0, 0.5555556)
+shader_parameter/uv_offset = Vector2(0.071428575, 0.5555556)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_js80a"]
@@ -329,7 +340,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.071428575, 0.5555556)
+shader_parameter/uv_offset = Vector2(0.14285715, 0.5555556)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jpmet"]
@@ -340,7 +351,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.14285715, 0.5555556)
+shader_parameter/uv_offset = Vector2(0.21428573, 0.5555556)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_34wr8"]
@@ -351,7 +362,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.21428573, 0.5555556)
+shader_parameter/uv_offset = Vector2(0.2857143, 0.5555556)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_j68ix"]
@@ -362,7 +373,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.2857143, 0.5555556)
+shader_parameter/uv_offset = Vector2(0.35714287, 0.5555556)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_u1l5v"]
@@ -373,7 +384,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.35714287, 0.5555556)
+shader_parameter/uv_offset = Vector2(0.2857143, 0)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5figv"]
@@ -384,7 +395,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.2857143, 0)
+shader_parameter/uv_offset = Vector2(0.42857146, 0.5555556)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rqe5m"]
@@ -395,7 +406,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.42857146, 0.5555556)
+shader_parameter/uv_offset = Vector2(0.5, 0.5555556)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_b6rmw"]
@@ -406,7 +417,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.5, 0.5555556)
+shader_parameter/uv_offset = Vector2(0, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_11d0m"]
@@ -417,7 +428,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.071428575, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3uxdm"]
@@ -428,7 +439,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.071428575, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.14285715, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hdy5h"]
@@ -439,7 +450,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.14285715, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.21428573, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hlgdu"]
@@ -450,7 +461,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.21428573, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.2857143, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_htrhe"]
@@ -461,7 +472,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.2857143, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.35714287, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7cx6x"]
@@ -472,7 +483,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.35714287, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.42857146, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_o7tl8"]
@@ -483,7 +494,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.42857146, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.5, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_uqgn3"]
@@ -494,7 +505,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.5, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.35714287, 0)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h3ke4"]
@@ -505,7 +516,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.35714287, 0)
+shader_parameter/uv_offset = Vector2(0.5714286, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2jj88"]
@@ -516,7 +527,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.5714286, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.6428572, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qm2lk"]
@@ -527,7 +538,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.6428572, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.71428573, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_stbdg"]
@@ -538,7 +549,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.71428573, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.7857143, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lfp8q"]
@@ -549,7 +560,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.7857143, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.8571429, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1vaqm"]
@@ -560,7 +571,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.8571429, 0.6666667)
+shader_parameter/uv_offset = Vector2(0.92857146, 0.6666667)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8xxwl"]
@@ -571,7 +582,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.92857146, 0.6666667)
+shader_parameter/uv_offset = Vector2(0, 0.7777778)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_r48wq"]
@@ -582,7 +593,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0, 0.7777778)
+shader_parameter/uv_offset = Vector2(0.071428575, 0.7777778)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fdtot"]
@@ -593,7 +604,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.071428575, 0.7777778)
+shader_parameter/uv_offset = Vector2(0.14285715, 0.7777778)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_y0ea1"]
@@ -604,7 +615,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.14285715, 0.7777778)
+shader_parameter/uv_offset = Vector2(0.21428573, 0.7777778)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g34ve"]
@@ -615,7 +626,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.21428573, 0.7777778)
+shader_parameter/uv_offset = Vector2(0.42857146, 0)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lavc6"]
@@ -626,7 +637,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.42857146, 0)
+shader_parameter/uv_offset = Vector2(0.2857143, 0.7777778)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_k6v54"]
@@ -637,7 +648,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.2857143, 0.7777778)
+shader_parameter/uv_offset = Vector2(0.35714287, 0.7777778)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rnf7i"]
@@ -648,7 +659,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.35714287, 0.7777778)
+shader_parameter/uv_offset = Vector2(0, 0.8888889)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jaq2k"]
@@ -659,7 +670,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0, 0.8888889)
+shader_parameter/uv_offset = Vector2(0.071428575, 0.8888889)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xdtng"]
@@ -670,7 +681,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.071428575, 0.8888889)
+shader_parameter/uv_offset = Vector2(0.14285715, 0.8888889)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1etgc"]
@@ -681,7 +692,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.14285715, 0.8888889)
+shader_parameter/uv_offset = Vector2(0.21428573, 0.8888889)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_evscs"]
@@ -692,7 +703,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.21428573, 0.8888889)
+shader_parameter/uv_offset = Vector2(0.2857143, 0.8888889)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4rn6v"]
@@ -703,7 +714,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.2857143, 0.8888889)
+shader_parameter/uv_offset = Vector2(0.35714287, 0.8888889)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gn356"]
@@ -714,7 +725,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.35714287, 0.8888889)
+shader_parameter/uv_offset = Vector2(0.42857146, 0.8888889)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8x03h"]
@@ -725,7 +736,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.42857146, 0.8888889)
+shader_parameter/uv_offset = Vector2(0.5, 0)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_38q07"]
@@ -736,7 +747,7 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.5, 0)
+shader_parameter/uv_offset = Vector2(0.5714286, 0)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_p3ud8"]
@@ -747,505 +758,494 @@ size = Vector2(1, 1)
 render_priority = 0
 shader = ExtResource("1_vk0ap")
 shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.5714286, 0)
+shader_parameter/uv_offset = Vector2(0.6428572, 0)
 shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_u3ras"]
 material = SubResource("ShaderMaterial_anwnd")
 size = Vector2(1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cqksn"]
-render_priority = 0
-shader = ExtResource("1_vk0ap")
-shader_parameter/atlas_tex = ExtResource("2_0che7")
-shader_parameter/uv_offset = Vector2(0.6428572, 0)
-shader_parameter/uv_scale = Vector2(0.071428575, 0.11111111)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_jxgec"]
-material = SubResource("ShaderMaterial_cqksn")
-size = Vector2(1, 1)
-
 [resource]
 item/0/name = "BIGBRICKS.png"
-item/0/mesh = SubResource("PlaneMesh_tkqtj")
+item/0/mesh = SubResource("PlaneMesh_0che7")
 item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/mesh_cast_shadow = 1
-item/0/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/0/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
 item/1/name = "CASTLEBRICKS.png"
-item/1/mesh = SubResource("PlaneMesh_2p66a")
+item/1/mesh = SubResource("PlaneMesh_wrs5v")
 item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/mesh_cast_shadow = 1
-item/1/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/1/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/navigation_layers = 1
 item/2/name = "CLAYBRICKS.png"
-item/2/mesh = SubResource("PlaneMesh_b4fe7")
+item/2/mesh = SubResource("PlaneMesh_uqqyk")
 item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/mesh_cast_shadow = 1
-item/2/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/2/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/navigation_layers = 1
 item/3/name = "DUNGEONBRICKS.png"
-item/3/mesh = SubResource("PlaneMesh_2su68")
+item/3/mesh = SubResource("PlaneMesh_sg020")
 item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/3/mesh_cast_shadow = 1
-item/3/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/3/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/3/navigation_layers = 1
 item/4/name = "DUNGEONCELL.png"
-item/4/mesh = SubResource("PlaneMesh_rqe5m")
+item/4/mesh = SubResource("PlaneMesh_5figv")
 item/4/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/4/mesh_cast_shadow = 1
-item/4/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/4/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/4/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/4/navigation_layers = 1
 item/5/name = "GOOBRICKS.png"
-item/5/mesh = SubResource("PlaneMesh_2jj88")
+item/5/mesh = SubResource("PlaneMesh_h3ke4")
 item/5/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/5/mesh_cast_shadow = 1
-item/5/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/5/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/5/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/5/navigation_layers = 1
 item/6/name = "PORCELAINBRICKS.png"
-item/6/mesh = SubResource("PlaneMesh_k6v54")
+item/6/mesh = SubResource("PlaneMesh_lavc6")
 item/6/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/6/mesh_cast_shadow = 1
-item/6/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/6/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/6/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/6/navigation_layers = 1
 item/7/name = "REDBRICKS.png"
-item/7/mesh = SubResource("PlaneMesh_p3ud8")
+item/7/mesh = SubResource("PlaneMesh_38q07")
 item/7/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/7/mesh_cast_shadow = 1
-item/7/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/7/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/7/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/7/navigation_layers = 1
 item/8/name = "ROUNDBRICKS.png"
-item/8/mesh = SubResource("PlaneMesh_u3ras")
+item/8/mesh = SubResource("PlaneMesh_p3ud8")
 item/8/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/8/mesh_cast_shadow = 1
-item/8/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/8/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/8/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/8/navigation_layers = 1
 item/9/name = "SLIMBRICKS.png"
-item/9/mesh = SubResource("PlaneMesh_jxgec")
+item/9/mesh = SubResource("PlaneMesh_u3ras")
 item/9/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/9/mesh_cast_shadow = 1
-item/9/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/9/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/9/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/9/navigation_layers = 1
 item/10/name = "BRICKS.png"
-item/10/mesh = SubResource("PlaneMesh_8a7c2")
+item/10/mesh = SubResource("PlaneMesh_2p66a")
 item/10/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/10/mesh_cast_shadow = 1
-item/10/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/10/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/10/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/10/navigation_layers = 1
 item/11/name = "BRICKSBOTLEFT.png"
-item/11/mesh = SubResource("PlaneMesh_w2py4")
+item/11/mesh = SubResource("PlaneMesh_8a7c2")
 item/11/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/11/mesh_cast_shadow = 1
-item/11/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/11/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/11/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/11/navigation_layers = 1
 item/12/name = "BRICKSBOTMID.png"
-item/12/mesh = SubResource("PlaneMesh_g3f1n")
+item/12/mesh = SubResource("PlaneMesh_w2py4")
 item/12/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/12/mesh_cast_shadow = 1
-item/12/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/12/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/12/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/12/navigation_layers = 1
 item/13/name = "BRICKSBOTRIGHT.png"
-item/13/mesh = SubResource("PlaneMesh_hcqnd")
+item/13/mesh = SubResource("PlaneMesh_g3f1n")
 item/13/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/13/mesh_cast_shadow = 1
-item/13/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/13/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/13/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/13/navigation_layers = 1
 item/14/name = "BRICKSTOPLEFT.png"
-item/14/mesh = SubResource("PlaneMesh_j077c")
+item/14/mesh = SubResource("PlaneMesh_hcqnd")
 item/14/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/14/mesh_cast_shadow = 1
-item/14/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/14/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/14/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/14/navigation_layers = 1
 item/15/name = "BRICKSTOPRIGHT.png"
-item/15/mesh = SubResource("PlaneMesh_ulrqj")
+item/15/mesh = SubResource("PlaneMesh_j077c")
 item/15/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/15/mesh_cast_shadow = 1
-item/15/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/15/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/15/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/15/navigation_layers = 1
 item/16/name = "CREAKYDOOR.png"
-item/16/mesh = SubResource("PlaneMesh_46rp4")
+item/16/mesh = SubResource("PlaneMesh_ulrqj")
 item/16/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/16/mesh_cast_shadow = 1
-item/16/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/16/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/16/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/16/navigation_layers = 1
 item/17/name = "OFFICEDOOR.png"
-item/17/mesh = SubResource("PlaneMesh_sv7nm")
+item/17/mesh = SubResource("PlaneMesh_46rp4")
 item/17/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/17/mesh_cast_shadow = 1
-item/17/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/17/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/17/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/17/navigation_layers = 1
 item/18/name = "SPOOKYDOOR.png"
-item/18/mesh = SubResource("PlaneMesh_8on40")
+item/18/mesh = SubResource("PlaneMesh_sv7nm")
 item/18/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/18/mesh_cast_shadow = 1
-item/18/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/18/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/18/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/18/navigation_layers = 1
 item/19/name = "BIGLEAVES.png"
-item/19/mesh = SubResource("PlaneMesh_uqqyk")
+item/19/mesh = SubResource("PlaneMesh_8on40")
 item/19/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/19/mesh_cast_shadow = 1
-item/19/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/19/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/19/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/19/navigation_layers = 1
 item/20/name = "LAVA.png"
-item/20/mesh = SubResource("PlaneMesh_il8we")
+item/20/mesh = SubResource("PlaneMesh_b4fe7")
 item/20/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/20/mesh_cast_shadow = 1
-item/20/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/20/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/20/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/20/navigation_layers = 1
 item/21/name = "RAPIDS.png"
-item/21/mesh = SubResource("PlaneMesh_t0lxo")
+item/21/mesh = SubResource("PlaneMesh_il8we")
 item/21/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/21/mesh_cast_shadow = 1
-item/21/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/21/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/21/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/21/navigation_layers = 1
 item/22/name = "SAND.png"
-item/22/mesh = SubResource("PlaneMesh_dm2c2")
+item/22/mesh = SubResource("PlaneMesh_t0lxo")
 item/22/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/22/mesh_cast_shadow = 1
-item/22/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/22/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/22/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/22/navigation_layers = 1
 item/23/name = "SANDMARKS.png"
-item/23/mesh = SubResource("PlaneMesh_sjiy8")
+item/23/mesh = SubResource("PlaneMesh_dm2c2")
 item/23/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/23/mesh_cast_shadow = 1
-item/23/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/23/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/23/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/23/navigation_layers = 1
 item/24/name = "SNOW.png"
-item/24/mesh = SubResource("PlaneMesh_15yxd")
+item/24/mesh = SubResource("PlaneMesh_sjiy8")
 item/24/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/24/mesh_cast_shadow = 1
-item/24/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/24/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/24/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/24/navigation_layers = 1
 item/25/name = "TALLGRASS.png"
-item/25/mesh = SubResource("PlaneMesh_hftb1")
+item/25/mesh = SubResource("PlaneMesh_15yxd")
 item/25/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/25/mesh_cast_shadow = 1
-item/25/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/25/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/25/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/25/navigation_layers = 1
 item/26/name = "TINYLEAVES.png"
-item/26/mesh = SubResource("PlaneMesh_uyp5n")
+item/26/mesh = SubResource("PlaneMesh_hftb1")
 item/26/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/26/mesh_cast_shadow = 1
-item/26/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/26/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/26/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/26/navigation_layers = 1
 item/27/name = "WATER.png"
-item/27/mesh = SubResource("PlaneMesh_4oqtu")
+item/27/mesh = SubResource("PlaneMesh_uyp5n")
 item/27/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/27/mesh_cast_shadow = 1
-item/27/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/27/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/27/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/27/navigation_layers = 1
 item/28/name = "CROSSCUBE.png"
-item/28/mesh = SubResource("PlaneMesh_7587j")
+item/28/mesh = SubResource("PlaneMesh_4oqtu")
 item/28/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/28/mesh_cast_shadow = 1
-item/28/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/28/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/28/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/28/navigation_layers = 1
 item/29/name = "CROSSWALL.png"
-item/29/mesh = SubResource("PlaneMesh_sg020")
+item/29/mesh = SubResource("PlaneMesh_7587j")
 item/29/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/29/mesh_cast_shadow = 1
-item/29/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/29/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/29/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/29/navigation_layers = 1
 item/30/name = "METALTILE.png"
-item/30/mesh = SubResource("PlaneMesh_51lg5")
+item/30/mesh = SubResource("PlaneMesh_2su68")
 item/30/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/30/mesh_cast_shadow = 1
-item/30/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/30/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/30/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/30/navigation_layers = 1
 item/31/name = "PIPES.png"
-item/31/mesh = SubResource("PlaneMesh_mkf73")
+item/31/mesh = SubResource("PlaneMesh_51lg5")
 item/31/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/31/mesh_cast_shadow = 1
-item/31/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/31/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/31/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/31/navigation_layers = 1
 item/32/name = "STORAGE.png"
-item/32/mesh = SubResource("PlaneMesh_j7e2f")
+item/32/mesh = SubResource("PlaneMesh_mkf73")
 item/32/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/32/mesh_cast_shadow = 1
-item/32/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/32/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/32/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/32/navigation_layers = 1
 item/33/name = "SUPPORT.png"
-item/33/mesh = SubResource("PlaneMesh_40w04")
+item/33/mesh = SubResource("PlaneMesh_j7e2f")
 item/33/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/33/mesh_cast_shadow = 1
-item/33/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/33/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/33/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/33/navigation_layers = 1
 item/34/name = "DIRT.png"
-item/34/mesh = SubResource("PlaneMesh_js80a")
+item/34/mesh = SubResource("PlaneMesh_40w04")
 item/34/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/34/mesh_cast_shadow = 1
-item/34/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/34/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/34/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/34/navigation_layers = 1
 item/35/name = "FLATSTONES.png"
-item/35/mesh = SubResource("PlaneMesh_jpmet")
+item/35/mesh = SubResource("PlaneMesh_js80a")
 item/35/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/35/mesh_cast_shadow = 1
-item/35/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/35/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/35/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/35/navigation_layers = 1
 item/36/name = "GOLDROCKS.png"
-item/36/mesh = SubResource("PlaneMesh_34wr8")
+item/36/mesh = SubResource("PlaneMesh_jpmet")
 item/36/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/36/mesh_cast_shadow = 1
-item/36/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/36/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/36/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/36/navigation_layers = 1
 item/37/name = "GRAYROCKS.png"
-item/37/mesh = SubResource("PlaneMesh_j68ix")
+item/37/mesh = SubResource("PlaneMesh_34wr8")
 item/37/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/37/mesh_cast_shadow = 1
-item/37/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/37/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/37/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/37/navigation_layers = 1
 item/38/name = "ICEYROCKS.png"
-item/38/mesh = SubResource("PlaneMesh_u1l5v")
+item/38/mesh = SubResource("PlaneMesh_j68ix")
 item/38/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/38/mesh_cast_shadow = 1
-item/38/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/38/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/38/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/38/navigation_layers = 1
 item/39/name = "LAVAROCKS.png"
-item/39/mesh = SubResource("PlaneMesh_5figv")
+item/39/mesh = SubResource("PlaneMesh_u1l5v")
 item/39/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/39/mesh_cast_shadow = 1
-item/39/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/39/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/39/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/39/navigation_layers = 1
 item/40/name = "PATHROCKS.png"
-item/40/mesh = SubResource("PlaneMesh_b6rmw")
+item/40/mesh = SubResource("PlaneMesh_rqe5m")
 item/40/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/40/mesh_cast_shadow = 1
-item/40/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/40/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/40/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/40/navigation_layers = 1
 item/41/name = "SLIMROCKS.png"
-item/41/mesh = SubResource("PlaneMesh_11d0m")
+item/41/mesh = SubResource("PlaneMesh_b6rmw")
 item/41/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/41/mesh_cast_shadow = 1
-item/41/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/41/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/41/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/41/navigation_layers = 1
 item/42/name = "BIGSQUARES.png"
-item/42/mesh = SubResource("PlaneMesh_3uxdm")
+item/42/mesh = SubResource("PlaneMesh_11d0m")
 item/42/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/42/mesh_cast_shadow = 1
-item/42/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/42/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/42/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/42/navigation_layers = 1
 item/43/name = "DENTWALL.png"
-item/43/mesh = SubResource("PlaneMesh_hdy5h")
+item/43/mesh = SubResource("PlaneMesh_3uxdm")
 item/43/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/43/mesh_cast_shadow = 1
-item/43/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/43/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/43/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/43/navigation_layers = 1
 item/44/name = "DIRTHEXAGONS.png"
-item/44/mesh = SubResource("PlaneMesh_hlgdu")
+item/44/mesh = SubResource("PlaneMesh_hdy5h")
 item/44/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/44/mesh_cast_shadow = 1
-item/44/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/44/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/44/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/44/navigation_layers = 1
 item/45/name = "DOUBLELIGHTS.png"
-item/45/mesh = SubResource("PlaneMesh_htrhe")
+item/45/mesh = SubResource("PlaneMesh_hlgdu")
 item/45/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/45/mesh_cast_shadow = 1
-item/45/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/45/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/45/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/45/navigation_layers = 1
 item/46/name = "HEXAGONS.png"
-item/46/mesh = SubResource("PlaneMesh_7cx6x")
+item/46/mesh = SubResource("PlaneMesh_htrhe")
 item/46/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/46/mesh_cast_shadow = 1
-item/46/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/46/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/46/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/46/navigation_layers = 1
 item/47/name = "HIGHTECH.png"
-item/47/mesh = SubResource("PlaneMesh_o7tl8")
+item/47/mesh = SubResource("PlaneMesh_7cx6x")
 item/47/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/47/mesh_cast_shadow = 1
-item/47/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/47/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/47/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/47/navigation_layers = 1
 item/48/name = "HIGHTECHWALL.png"
-item/48/mesh = SubResource("PlaneMesh_uqgn3")
+item/48/mesh = SubResource("PlaneMesh_o7tl8")
 item/48/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/48/mesh_cast_shadow = 1
-item/48/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/48/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/48/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/48/navigation_layers = 1
 item/49/name = "LONGLIGHTS.png"
-item/49/mesh = SubResource("PlaneMesh_h3ke4")
+item/49/mesh = SubResource("PlaneMesh_uqgn3")
 item/49/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/49/mesh_cast_shadow = 1
-item/49/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/49/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/49/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/49/navigation_layers = 1
 item/50/name = "STARWALLA.png"
-item/50/mesh = SubResource("PlaneMesh_qm2lk")
+item/50/mesh = SubResource("PlaneMesh_2jj88")
 item/50/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/50/mesh_cast_shadow = 1
-item/50/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/50/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/50/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/50/navigation_layers = 1
 item/51/name = "STARWALLB.png"
-item/51/mesh = SubResource("PlaneMesh_stbdg")
+item/51/mesh = SubResource("PlaneMesh_qm2lk")
 item/51/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/51/mesh_cast_shadow = 1
-item/51/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/51/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/51/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/51/navigation_layers = 1
 item/52/name = "TECHWALLA.png"
-item/52/mesh = SubResource("PlaneMesh_lfp8q")
+item/52/mesh = SubResource("PlaneMesh_stbdg")
 item/52/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/52/mesh_cast_shadow = 1
-item/52/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/52/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/52/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/52/navigation_layers = 1
 item/53/name = "TECHWALLB.png"
-item/53/mesh = SubResource("PlaneMesh_1vaqm")
+item/53/mesh = SubResource("PlaneMesh_lfp8q")
 item/53/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/53/mesh_cast_shadow = 1
-item/53/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/53/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/53/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/53/navigation_layers = 1
 item/54/name = "TINYLIGHTS.png"
-item/54/mesh = SubResource("PlaneMesh_8xxwl")
+item/54/mesh = SubResource("PlaneMesh_1vaqm")
 item/54/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/54/mesh_cast_shadow = 1
-item/54/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/54/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/54/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/54/navigation_layers = 1
 item/55/name = "TINYSQUARES.png"
-item/55/mesh = SubResource("PlaneMesh_r48wq")
+item/55/mesh = SubResource("PlaneMesh_8xxwl")
 item/55/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/55/mesh_cast_shadow = 1
-item/55/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/55/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/55/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/55/navigation_layers = 1
 item/56/name = "BIGWINDOW.png"
-item/56/mesh = SubResource("PlaneMesh_fdtot")
+item/56/mesh = SubResource("PlaneMesh_r48wq")
 item/56/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/56/mesh_cast_shadow = 1
-item/56/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/56/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/56/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/56/navigation_layers = 1
 item/57/name = "CHESS.png"
-item/57/mesh = SubResource("PlaneMesh_y0ea1")
+item/57/mesh = SubResource("PlaneMesh_fdtot")
 item/57/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/57/mesh_cast_shadow = 1
-item/57/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/57/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/57/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/57/navigation_layers = 1
 item/58/name = "GARAGE.png"
-item/58/mesh = SubResource("PlaneMesh_g34ve")
+item/58/mesh = SubResource("PlaneMesh_y0ea1")
 item/58/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/58/mesh_cast_shadow = 1
-item/58/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/58/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/58/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/58/navigation_layers = 1
 item/59/name = "GRAYWALL.png"
-item/59/mesh = SubResource("PlaneMesh_lavc6")
+item/59/mesh = SubResource("PlaneMesh_g34ve")
 item/59/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/59/mesh_cast_shadow = 1
-item/59/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/59/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/59/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/59/navigation_layers = 1
 item/60/name = "PAVEMENT.png"
-item/60/mesh = SubResource("PlaneMesh_rnf7i")
+item/60/mesh = SubResource("PlaneMesh_k6v54")
 item/60/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/60/mesh_cast_shadow = 1
-item/60/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/60/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/60/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/60/navigation_layers = 1
 item/61/name = "WINDOW.png"
-item/61/mesh = SubResource("PlaneMesh_jaq2k")
+item/61/mesh = SubResource("PlaneMesh_rnf7i")
 item/61/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/61/mesh_cast_shadow = 1
-item/61/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/61/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/61/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/61/navigation_layers = 1
 item/62/name = "BIGTRUNK.png"
-item/62/mesh = SubResource("PlaneMesh_xdtng")
+item/62/mesh = SubResource("PlaneMesh_jaq2k")
 item/62/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/62/mesh_cast_shadow = 1
-item/62/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/62/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/62/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/62/navigation_layers = 1
 item/63/name = "CREAKYWOOD.png"
-item/63/mesh = SubResource("PlaneMesh_1etgc")
+item/63/mesh = SubResource("PlaneMesh_xdtng")
 item/63/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/63/mesh_cast_shadow = 1
-item/63/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/63/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/63/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/63/navigation_layers = 1
 item/64/name = "DARKWOOD.png"
-item/64/mesh = SubResource("PlaneMesh_evscs")
+item/64/mesh = SubResource("PlaneMesh_1etgc")
 item/64/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/64/mesh_cast_shadow = 1
-item/64/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/64/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/64/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/64/navigation_layers = 1
 item/65/name = "TRUNKS.png"
-item/65/mesh = SubResource("PlaneMesh_4rn6v")
+item/65/mesh = SubResource("PlaneMesh_evscs")
 item/65/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/65/mesh_cast_shadow = 1
-item/65/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/65/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/65/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/65/navigation_layers = 1
 item/66/name = "WOODA.png"
-item/66/mesh = SubResource("PlaneMesh_gn356")
+item/66/mesh = SubResource("PlaneMesh_4rn6v")
 item/66/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/66/mesh_cast_shadow = 1
-item/66/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/66/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/66/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/66/navigation_layers = 1
 item/67/name = "WOODB.png"
-item/67/mesh = SubResource("PlaneMesh_8x03h")
+item/67/mesh = SubResource("PlaneMesh_gn356")
 item/67/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/67/mesh_cast_shadow = 1
-item/67/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/67/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/67/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/67/navigation_layers = 1
 item/68/name = "WOODTILE.png"
-item/68/mesh = SubResource("PlaneMesh_38q07")
+item/68/mesh = SubResource("PlaneMesh_8x03h")
 item/68/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/68/mesh_cast_shadow = 1
-item/68/shapes = [SubResource("BoxShape3D_wrs5v"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/68/shapes = [SubResource("BoxShape3D_6munc"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/68/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/68/navigation_layers = 1

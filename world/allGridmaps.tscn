@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjq237ryuf2v"]
+
+[ext_resource type="MeshLibrary" uid="uid://bs1del24g77tb" path="res://assets/pixelTextureAtlas/FloorLibrary.tres" id="1_xaesj"]
+[ext_resource type="MeshLibrary" uid="uid://bxdfsu3l0u2jq" path="res://assets/pixelTextureAtlas/WallLibrary.tres" id="2_svhb7"]
+[ext_resource type="MeshLibrary" uid="uid://dpf0q4mv8ruhp" path="res://assets/decorations/simpleNatureMeshLib.tres" id="3_oc5rw"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="FloorMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_xaesj")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="WallMap" type="GridMap" parent="."]
+mesh_library = ExtResource("2_svhb7")
+cell_size = Vector3(1, 1, 1)
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="DecoMap" type="GridMap" parent="."]
+mesh_library = ExtResource("3_oc5rw")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+metadata/_editor_floor_ = Vector3(0, 0, 0)

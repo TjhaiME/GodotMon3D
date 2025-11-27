@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://cl8lhxq6ge2fj"]
+
+[ext_resource type="MeshLibrary" uid="uid://dpf0q4mv8ruhp" path="res://assets/decorations/simpleNatureMeshLib.tres" id="1_n0644"]
+[ext_resource type="Script" uid="uid://csp2efog3a3to" path="res://world/decoration_grid_map.gd" id="1_nvbkc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5hcl"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_oajwy"]
+sky_material = SubResource("ProceduralSkyMaterial_c5hcl")
+
+[sub_resource type="Environment" id="Environment_1li8i"]
+background_mode = 2
+sky = SubResource("Sky_oajwy")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nvbkc"]
+
+[node name="DecorationGridMap" type="GridMap"]
+mesh_library = ExtResource("1_n0644")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(0, 0, 25, 65535, 0, 25, 0, 65535, 83, 65535, 65535, 25, 0, 65534, 0, 65535, 65534, 1, 1, 0, 20, 1, 65535, 83, 1, 65534, 7, 65534, 65534, 8, 65535, 1, 43, 0, 1, 44, 1, 1, 45, 65534, 1, 46, 65534, 2, 47, 65535, 2, 48, 0, 2, 41, 1, 2, 42, 65534, 3, 23, 65535, 3, 22, 0, 3, 21, 1, 3, 18, 65534, 4, 17, 65535, 4, 16, 0, 4, 15, 1, 4, 49, 65534, 5, 40, 65535, 5, 39, 0, 5, 25, 1, 5, 24, 65534, 6, 20, 65535, 6, 19, 65533, 3, 26, 65533, 2, 27, 65533, 1, 26, 65533, 65535, 36, 65532, 65535, 37, 2, 65535, 13, 3, 65535, 81, 4, 65535, 84, 5, 65535, 85, 3, 65534, 87, 4, 65534, 94, 2, 65533, 94, 1, 65533, 96, 2, 65534, 97, 3, 65533, 98, 4, 65533, 89, 5, 65533, 89, 4, 4, 105, 4, 3, 105, 3, 4, 105, 3, 3, 105, 2, 3, 105, 2, 4, 105, 4, 1, 32, 0, 65533, 59, 5, 3, 60, 5, 0, 60, 7, 3, 60, 7, 0, 60, 9, 3, 60, 9, 0, 60, 2, 1, 33, 3, 1, 32, 3, 2, 58, 3, 0, 14, 2, 0, 9, 4, 0, 14, 3, 6, 5, 5, 5, 72, 5, 4, 73, 5, 6, 74, 6, 6, 75, 6, 5, 76, 3, 9, 0, 2, 8, 0, 4, 8, 0, 4, 10, 127, 6, 10, 127, 5, 9, 127, 3, 10, 2, 5, 10, 1, 6, 9, 57, 4, 9, 49, 6, 8, 112)
+}
+script = ExtResource("1_nvbkc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1li8i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47426915, 0.46180308, -0.529741)
+mesh = SubResource("BoxMesh_nvbkc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9899522, 0.1414023, 0, -0.1414023, 0.9899522, 5.911436, 1.5675626, 11.777496)

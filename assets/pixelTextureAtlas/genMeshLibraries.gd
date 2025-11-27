@@ -105,8 +105,9 @@ func build_hollow_wall_mesh(width: float = 1.0, depth: float = 1.0, height: floa
 	return arr_mesh
 
 
-#
-#func build_hollow_wall_mesh(width: float = 1.0, depth: float = 1.0, height: float = 1.0) -> ArrayMesh:
+##
+###NEARLY WORKING NEEDS UV FOR TEXTURES
+#func build_ramp_mesh(width: float = 1.0, depth: float = 1.0, height: float = 1.0) -> ArrayMesh:
 	#var arr_mesh = ArrayMesh.new()
 #
 	## Half sizes
@@ -114,105 +115,210 @@ func build_hollow_wall_mesh(width: float = 1.0, depth: float = 1.0, height: floa
 	#var hz = depth / 2.0
 	#var hy = height / 2.0
 #
-	## Vertices for 4 vertical faces (front, back, left, right)
+	## Vertices for 4 faces (back, sloped front, left triangle, right triangle)
 	#var faces = [
-		## front face (normal pointing -Z)
-		#[ Vector3(-hx, -hy, -hz), Vector3(hx, -hy, -hz), Vector3(hx, hy, -hz), Vector3(-hx, hy, -hz) ],
-		## back face (normal pointing +Z) -> flip vertex order
-		#[ Vector3(-hx, -hy, hz), Vector3(hx, -hy, hz), Vector3(hx, hy, hz), Vector3(-hx, hy, hz) ],
-		## left face (normal pointing -X)
-		#[ Vector3(-hx, -hy, hz), Vector3(-hx, -hy, -hz), Vector3(-hx, hy, -hz), Vector3(-hx, hy, hz) ],
-		## right face (normal pointing +X)
-		#[ Vector3(hx, -hy, -hz), Vector3(hx, -hy, hz), Vector3(hx, hy, hz), Vector3(hx, hy, -hz) ],
+		## back face (+Z) - same as wall back
+		#[ Vector3(hx, -hy, hz), Vector3(-hx, -hy, hz), Vector3(-hx, hy, hz), Vector3(hx, hy, hz) ],
+		##+y>+x
+		##^   v (-y)
+		##-x< x (start)
+		## front sloped rectangle (-Z) - connects bottom back to top front
+		#[ Vector3(-hx, -hy, -hz), Vector3(hx, -hy, -hz), Vector3(hx, hy, hz), Vector3(-hx, hy, hz) ],
+		##+y>-x
+		##^   v (-y)
+		##+x< -x (start)
+		## left triangle (-X)
+		#[ Vector3(-hx, -hy, hz), Vector3(-hx, -hy, -hz), Vector3(-hx, hy, hz) ],
+		##_=z / = diagonalyz | = y
+		##_/|
+		##^ +y+z v
+		##-z < +z (start)
+		## right triangle (+X)
+		#[ Vector3(hx, -hy, -hz), Vector3(hx, -hy, hz), Vector3(hx, hy, hz) ],
+		##_|/
 	#]
 #
-	## Flip back face winding
+	## Indices for triangles (each face)
 	#var indices_faces = [
-		#[0,1,2, 0,2,3],   # front
-		#[0,2,1, 0,3,2],   # back (flipped)
-		#[0,1,2, 0,2,3],   # left
-		#[0,1,2, 0,2,3],   # right
+		#[0,1,2, 0,2,3],  # back rectangle
+		#[0,1,2, 0,2,3],  # front sloped rectangle
+		#[0,1,2],          # left triangle
+		#[0,1,2],          # right triangle
 	#]
 #
-	#var uvs = [
-		#Vector2(0,0), Vector2(1,0), Vector2(1,1), Vector2(0,1)
-	#]
+	## UVs (same for all rectangle faces; triangles will reuse the first 3 UVs)
+	#var uv_rect = [Vector2(0,0), Vector2(1,0), Vector2(1,1), Vector2(0,1)]
+	#var uv_tri = [Vector2(0,0), Vector2(1,0), Vector2(1,1)]
 #
 	#for f in range(faces.size()):
 		#var arr = []
 		#arr.resize(Mesh.ARRAY_MAX)
 		#arr[Mesh.ARRAY_VERTEX] = PackedVector3Array(faces[f])
-		#arr[Mesh.ARRAY_TEX_UV] = PackedVector2Array(uvs)
+		#if faces[f].size() == 4:
+			#arr[Mesh.ARRAY_TEX_UV] = PackedVector2Array(uv_rect)
+		#else:
+			#arr[Mesh.ARRAY_TEX_UV] = PackedVector2Array(uv_tri)
 		#arr[Mesh.ARRAY_INDEX] = PackedInt32Array(indices_faces[f])
 		#arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
 #
 	#return arr_mesh
 
+func build_convex_collision_from_mesh(mesh: ArrayMesh) -> ConvexPolygonShape3D:
+	var all_points = PackedVector3Array()
 
-#func build_hollow_wall_mesh(width: float = 1.0, depth: float = 1.0, height: float = 1.0) -> ArrayMesh:
-	#var arr_mesh = ArrayMesh.new()
-#
-	## Half sizes
-	#var hx = width / 2.0
-	#var hz = depth / 2.0
-	#var hy = height / 2.0
-#
-	## Vertices for 4 vertical faces (front, back, left, right)
-	#var faces = [
-		## front face
-		#[ Vector3(-hx, -hy, -hz), Vector3(hx, -hy, -hz), Vector3(hx, hy, -hz), Vector3(-hx, hy, -hz) ],
-		## back face
-		#[ Vector3(hx, -hy, hz), Vector3(-hx, -hy, hz), Vector3(-hx, hy, hz), Vector3(hx, hy, hz) ],
-		## left face
-		#[ Vector3(-hx, -hy, hz), Vector3(-hx, -hy, -hz), Vector3(-hx, hy, -hz), Vector3(-hx, hy, hz) ],
-		## right face
-		#[ Vector3(hx, -hy, -hz), Vector3(hx, -hy, hz), Vector3(hx, hy, hz), Vector3(hx, hy, -hz) ],
-	#]
-#
-	#var uvs = [
-		#Vector2(0,0), Vector2(1,0), Vector2(1,1), Vector2(0,1)
-	#]
-#
-	#for face in faces:
-		#var arr = []
-		#arr.resize(Mesh.ARRAY_MAX)
-		#arr[Mesh.ARRAY_VERTEX] = PackedVector3Array(face)
-		#arr[Mesh.ARRAY_TEX_UV] = PackedVector2Array(uvs)
-		#arr[Mesh.ARRAY_INDEX] = PackedInt32Array([0,1,2, 0,2,3])
-		#arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
-#
-	#return arr_mesh
+	for s in mesh.get_surface_count():
+		var arr = mesh.surface_get_arrays(s)
+		var verts = arr[Mesh.ARRAY_VERTEX]
+		all_points.append_array(verts)
 
-func build_wall_mesh():
+	var shape = ConvexPolygonShape3D.new()
+	shape.points = all_points
+	return shape
+
+
+func build_ramp_mesh(width: float = 1.0, depth: float = 1.0, height: float = 1.0) -> ArrayMesh:
 	var arr_mesh = ArrayMesh.new()
-	
-	var quads = [
-		{ "pos": Vector3(0, WALL_HEIGHT/2, -0.5), "rot": 0 },        # front
-		{ "pos": Vector3(0, WALL_HEIGHT/2, 0.5), "rot": PI },        # back
-		{ "pos": Vector3(-0.5, WALL_HEIGHT/2, 0), "rot": -PI/2 },    # left
-		{ "pos": Vector3(0.5, WALL_HEIGHT/2, 0), "rot": PI/2 }       # right
+
+	var hx = width / 2.0
+	var hz = depth / 2.0
+	var hy = height / 2.0
+
+	# --- ORIGINAL GEOMETRY (unchanged) ---
+	var faces = [
+		# Back face (+Z)
+		[
+			Vector3(hx, -hy, hz), #br
+			Vector3(-hx, -hy, hz),#-x #bl
+			Vector3(-hx, hy, hz),#+y #tl
+			Vector3(hx, hy, hz)#+x #tr
+			#-y
+		], #br,bl,tl,tr
+
+		# Sloped front quad
+		[
+			Vector3(-hx, -hy, -hz), #bl
+			Vector3(hx, -hy, -hz),#+x #br
+			Vector3(hx, hy, hz),#+y #tr
+			Vector3(-hx, hy, hz)#-x #tl
+			#-y
+		],#bl,br,tr,tl
+
+		# Left triangle (-X)
+		[
+			Vector3(-hx, -hy, hz), #bc
+			Vector3(-hx, -hy, -hz), #bf
+			Vector3(-hx, hy, hz) #t
+		], #bc, bf, c
+
+		# Right triangle (+X)
+		[
+			Vector3(hx, -hy, -hz), #bf
+			Vector3(hx, -hy, hz), #bc
+			Vector3(hx, hy, hz) #t
+		]
+	] #bf,bc,t
+
+	# --- TRIANGLE / QUAD INDICES (unchanged) ---
+	var indices = [
+		[0,1,2, 0,2,3],
+		[0,1,2, 0,2,3],
+		[0,1,2],
+		[0,1,2]
 	]
-	
-	for q in quads:
-		var quad = QuadMesh.new()
-		quad.size = Vector2(1, WALL_HEIGHT)
-		
-		var arr = quad.surface_get_arrays(0)
-		var xform = Transform3D(Basis().rotated(Vector3.UP, q.rot), q.pos)
-		
-		var new_arr = []
-		for i in range(arr.size()):
-			new_arr.append(arr[i])
-		
-		# transform vertices
-		var verts = new_arr[Mesh.ARRAY_VERTEX]
-		for i in range(verts.size()):
-			verts[i] = xform * verts[i]
-		new_arr[Mesh.ARRAY_VERTEX] = verts
-		
-		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, new_arr)
-	
+
+	# --- PER-FACE UVs (THIS IS THE IMPORTANT PART) ---
+
+	# Back face UVs
+	var uv_back = [
+		Vector2(0,0),
+		Vector2(1,0),
+		Vector2(1,1),
+		Vector2(0,1)
+	]
+
+	# Slope face UVs
+	#var uv_slope = [
+		#Vector2(0,0),
+		#Vector2(1,0),
+		#Vector2(1,1),
+		#Vector2(0,1)
+	#]
+	var uv_slope = [
+		Vector2(1,0),
+		Vector2(0,0),
+		Vector2(0,1),
+		Vector2(1,1)
+	]
+
+	# Left triangle UVs
+	var uv_left_tri = [
+		Vector2(1,0),
+		Vector2(0,0),
+		Vector2(1,1)
+	]
+
+	# Right triangle UVs
+	var uv_right_tri = [
+		Vector2(0,0),
+		Vector2(1,0),
+		Vector2(1,1)
+	]
+
+	var uv_sets = [
+		uv_back,
+		uv_slope,
+		uv_left_tri,
+		uv_right_tri
+	]
+
+	# --- BUILD SURFACES ---
+	for i in range(faces.size()):
+		var arr = []
+		arr.resize(Mesh.ARRAY_MAX)
+
+		arr[Mesh.ARRAY_VERTEX] = PackedVector3Array(faces[i])
+		arr[Mesh.ARRAY_INDEX] = PackedInt32Array(indices[i])
+		arr[Mesh.ARRAY_TEX_UV] = PackedVector2Array(uv_sets[i])
+
+		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
+
 	return arr_mesh
+
+
+
+
+
+#
+#func build_wall_mesh():
+	#var arr_mesh = ArrayMesh.new()
+	#
+	#var quads = [
+		#{ "pos": Vector3(0, WALL_HEIGHT/2, -0.5), "rot": 0 },        # front
+		#{ "pos": Vector3(0, WALL_HEIGHT/2, 0.5), "rot": PI },        # back
+		#{ "pos": Vector3(-0.5, WALL_HEIGHT/2, 0), "rot": -PI/2 },    # left
+		#{ "pos": Vector3(0.5, WALL_HEIGHT/2, 0), "rot": PI/2 }       # right
+	#]
+	#
+	#for q in quads:
+		#var quad = QuadMesh.new()
+		#quad.size = Vector2(1, WALL_HEIGHT)
+		#
+		#var arr = quad.surface_get_arrays(0)
+		#var xform = Transform3D(Basis().rotated(Vector3.UP, q.rot), q.pos)
+		#
+		#var new_arr = []
+		#for i in range(arr.size()):
+			#new_arr.append(arr[i])
+		#
+		## transform vertices
+		#var verts = new_arr[Mesh.ARRAY_VERTEX]
+		#for i in range(verts.size()):
+			#verts[i] = xform * verts[i]
+		#new_arr[Mesh.ARRAY_VERTEX] = verts
+		#
+		#arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, new_arr)
+	#
+	#return arr_mesh
 
 
 func _run():
@@ -243,7 +349,11 @@ func _run():
 
 	var wall_box = BoxShape3D.new()
 	wall_box.size = Vector3(TILE_SIZE_X, WALL_HEIGHT, TILE_SIZE_Y)
-
+	
+	var ramp_mesh = build_ramp_mesh(TILE_SIZE_X, TILE_SIZE_Y, 1.0)
+	var ramp_collision = build_convex_collision_from_mesh(ramp_mesh)
+	
+	
 	for category in atlas_data.keys():
 		for tile_name in atlas_data[category].keys():
 			var tile_info = atlas_data[category][tile_name]
@@ -274,6 +384,40 @@ func _run():
 			wall_lib.set_item_mesh(w_id, wall_copy)
 			wall_lib.set_item_shapes(w_id, [wall_box])
 			wall_lib.set_item_name(w_id, tile_name)
+
+
+			# --- Ramp mesh instance ---
+			var ramp_copy = ramp_mesh.duplicate()
+			#ramp_mesh.surface_set_material(0, tile_mat)
+
+			for s in range(ramp_copy.get_surface_count()):
+				ramp_copy.surface_set_material(s, tile_mat)
+
+			var ramp_item_id = wall_lib.get_last_unused_item_id()
+			wall_lib.create_item(ramp_item_id)
+			wall_lib.set_item_mesh(ramp_item_id, ramp_copy)
+
+			# Create collision
+			#var ramp_collision = ConvexPolygonShape3D.new()
+			#ramp_collision.points = ramp_mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]  # use vertices
+			#wall_lib.set_item_shapes(ramp_item_id, [ramp_collision])
+
+			
+			wall_lib.set_item_shapes(ramp_item_id, [ramp_collision])
+
+
+			
+			
+			wall_lib.set_item_name(ramp_item_id, tile_name + "_ramp")
+
+			## Optional: preview in scene
+			#var ramp_inst = MeshInstance3D.new()
+			#ramp_inst.mesh = ramp_mesh
+			#ramp_inst.name = tile_name + "_ramp_preview"
+			#ramp_inst.material_override = tile_mat
+			#ramp_inst.transform.origin = Vector3(tile_index_x, 0, tile_index_y)
+			#wall_cat_node.add_child(ramp_inst)
+
 
 	if ResourceSaver.save(floor_lib, FLOOR_LIB_PATH) != OK:
 		push_error("Failed to save floor library")
